@@ -1,0 +1,47 @@
+<footer class="bg-gray-900 text-gray-400">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+      <!-- Brand -->
+      <div class="col-span-2 md:col-span-1">
+        <div class="flex items-center space-x-2 mb-4">
+          <span class="text-2xl">🎯</span>
+          <span class="text-xl font-bold text-white">{{ .Site.Params.siteName }}</span>
+        </div>
+        <p class="text-sm">{{ .Site.Params.description }}</p>
+      </div>
+      <!-- Quick Links -->
+      <div>
+        <h3 class="text-sm font-semibold text-white uppercase mb-3">导航</h3>
+        <ul class="space-y-2">
+          <li><a href="/product/" class="text-sm hover:text-white transition-colors">商品推荐</a></li>
+          <li><a href="/coupon/" class="text-sm hover:text-white transition-colors">优惠券</a></li>
+          <li><a href="/deal/" class="text-sm hover:text-white transition-colors">促销活动</a></li>
+          <li><a href="/review/" class="text-sm hover:text-white transition-colors">产品评测</a></li>
+        </ul>
+      </div>
+      <!-- Categories -->
+      <div>
+        <h3 class="text-sm font-semibold text-white uppercase mb-3">分类</h3>
+        <ul class="space-y-2">
+          {{ range $name, $taxonomy := .Site.Taxonomies.categories }}
+          <li><a href="/category/{{ $name }}/" class="text-sm hover:text-white transition-colors">{{ $name | title }}</a></li>
+          {{ end }}
+        </ul>
+      </div>
+      <!-- Legal -->
+      <div>
+        <h3 class="text-sm font-semibold text-white uppercase mb-3">法律声明</h3>
+        <ul class="space-y-2">
+          <li><a href="/about/" class="text-sm hover:text-white transition-colors">关于我们</a></li>
+          <li><a href="/affiliate-disclosure/" class="text-sm hover:text-white transition-colors">联盟营销声明</a></li>
+          <li><a href="/privacy-policy/" class="text-sm hover:text-white transition-colors">隐私政策</a></li>
+          <li><a href="/contact/" class="text-sm hover:text-white transition-colors">联系我们</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="border-t border-gray-800 mt-8 pt-8 text-center text-sm">
+      <p>&copy; {{ now.Format "2006" }} {{ .Site.Params.siteName }}. All rights reserved.</p>
+      <p class="mt-2 text-xs text-gray-500">{{ .Site.Params.affiliate.disclaimer }}</p>
+    </div>
+  </div>
+</footer>

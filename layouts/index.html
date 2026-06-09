@@ -1,0 +1,118 @@
+{{ define "main" }}
+<!-- Hero -->
+<section class="bg-gradient-to-br from-primary-600 to-primary-800 text-white py-16 sm:py-24">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">发现优质好物 · 省心省钱</h1>
+    <p class="text-lg sm:text-xl text-primary-100 mb-8">专业评测 + 真实优惠 + 精选推荐</p>
+    <div class="max-w-xl mx-auto">
+      <div class="relative">
+        <input type="text" placeholder="搜索商品、优惠券、评测..." class="w-full px-6 py-4 rounded-2xl text-gray-900 text-lg focus:outline-none focus:ring-4 focus:ring-primary-300 shadow-xl" id="hero-search">
+        <button class="absolute right-2 top-2 px-6 py-2 bg-primary-600 text-white rounded-xl hover:bg-primary-700 transition-colors">搜索</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+{{ $products := where .Site.RegularPages "Section" "product" }}
+{{ $coupons := where .Site.RegularPages "Section" "coupon" }}
+{{ $deals := where .Site.RegularPages "Section" "deal" }}
+
+<!-- Featured Products -->
+<section class="py-12 sm:py-16 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between mb-8">
+      <div>
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900">🔥 热门商品</h2>
+        <p class="text-gray-600 mt-1">编辑精选推荐</p>
+      </div>
+      <a href="/product/" class="text-sm font-medium text-primary-600 hover:text-primary-700">查看全部 →</a>
+    </div>
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {{ range first 8 $products }}
+        {{ partial "product-card" (dict "product" .) }}
+      {{ end }}
+    </div>
+  </div>
+</section>
+
+<!-- Latest Coupons -->
+{{ if $coupons }}
+<section class="py-12 sm:py-16 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between mb-8">
+      <div>
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900">🎫 最新优惠券</h2>
+        <p class="text-gray-600 mt-1">已验证优惠码</p>
+      </div>
+      <a href="/coupon/" class="text-sm font-medium text-primary-600 hover:text-primary-700">查看全部 →</a>
+    </div>
+    <div class="grid gap-4 md:grid-cols-2">
+      {{ range first 6 $coupons }}
+        {{ partial "coupon-card" (dict "coupon" .) }}
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}
+
+<!-- Latest Deals -->
+{{ if $deals }}
+<section class="py-12 sm:py-16 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between mb-8">
+      <div>
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900">⚡ 限时促销</h2>
+        <p class="text-gray-600 mt-1">错过不再</p>
+      </div>
+      <a href="/deal/" class="text-sm font-medium text-primary-600 hover:text-primary-700">查看全部 →</a>
+    </div>
+    <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      {{ range first 6 $deals }}
+        {{ partial "deal-card" (dict "deal" .) }}
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}
+
+<!-- Categories -->
+<section class="py-12 sm:py-16 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-8">📂 浏览分类</h2>
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+      {{ range $name, $taxonomy := .Site.Taxonomies.categories }}
+        <a href="/category/{{ $name }}/" class="flex flex-col items-center p-6 bg-white rounded-xl shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-all duration-300 group">
+          <span class="text-3xl mb-2 group-hover:scale-110 transition-transform">
+            {{ if eq $name "electronics" }}💻{{ else if eq $name "home" }}🏠{{ else if eq $name "beauty" }}💄{{ else if eq $name "fashion" }}👗{{ else if eq $name "sports" }}⚽{{ else if eq $name "food" }}🍔{{ else }}📦{{ end }}
+          </span>
+          <span class="text-sm font-medium text-gray-700 group-hover:text-primary-600 transition-colors">{{ $name | title }}</span>
+          <span class="text-xs text-gray-500 mt-1">{{ .Count }} 件商品</span>
+        </a>
+      {{ end }}
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="py-12 sm:py-16 bg-primary-600 text-white text-center">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="text-2xl sm:text-3xl font-bold mb-4">订阅优惠资讯</h2>
+    <p class="text-primary-100 mb-8">每周精选好物推荐与独家优惠，直达邮箱</p>
+    <form class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+      <input type="email" placeholder="输入邮箱" class="flex-1 px-4 py-3 rounded-lg bg-white/90 text-gray-900 placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-white" required>
+      <button type="submit" class="px-6 py-3 bg-white text-primary-600 font-medium rounded-lg hover:bg-primary-50 transition-colors whitespace-nowrap">订阅</button>
+    </form>
+  </div>
+</section>
+
+<script>
+  const heroSearch = document.getElementById('hero-search');
+  if (heroSearch) {
+    heroSearch.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter' && e.target.value.length > 0) {
+        window.location.href = `/?q=${encodeURIComponent(e.target.value)}`;
+      }
+    });
+  }
+</script>
+{{ end }}

@@ -1,0 +1,27 @@
+<header class="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-gray-200">
+  <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <!-- Logo -->
+      <a href="/" class="flex items-center space-x-2">
+        <span class="text-2xl">🎯</span>
+        <span class="text-xl font-bold text-gray-900">{{ .Site.Params.siteName }}</span>
+      </a>
+      <!-- Desktop Nav -->
+      <div class="hidden md:flex items-center space-x-6">
+        <a href="/product/" class="text-sm font-medium text-gray-700 hover:text-primary-600">商品</a>
+        <a href="/coupon/" class="text-sm font-medium text-gray-700 hover:text-primary-600">优惠券</a>
+        <a href="/deal/" class="text-sm font-medium text-gray-700 hover:text-primary-600">促销</a>
+        <a href="/review/" class="text-sm font-medium text-gray-700 hover:text-primary-600">评测</a>
+        <a href="/blog/" class="text-sm font-medium text-gray-700 hover:text-primary-600">文章</a>
+      </div>
+      <!-- Search Trigger -->
+      <div class="flex items-center space-x-3">
+        <button id="search-trigger" class="flex items-center px-3 py-2 text-sm text-gray-500 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors" aria-label="搜索">
+          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          搜索...
+          <kbd class="ml-2 px-1.5 py-0.5 text-xs bg-white rounded border">⌘K</kbd>
+        </button>
+      </div>
+    </div>
+  </nav>
+</header>

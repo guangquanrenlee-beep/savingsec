@@ -1,0 +1,30 @@
+{{ define "main" }}
+<article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+  <nav class="flex items-center text-sm text-gray-500 mb-6">
+    <a href="/" class="hover:text-primary-600">首页</a><span class="mx-2">/</span>
+    <a href="/coupon/" class="hover:text-primary-600">优惠券</a><span class="mx-2">/</span>
+    <span class="text-gray-900">{{ .Title }}</span>
+  </nav>
+  <div class="bg-white rounded-2xl shadow-card p-6 sm:p-8">
+    <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">{{ .Title }}</h1>
+    {{ with .Params.description }}<p class="text-gray-600 mb-6">{{ . }}</p>{{ end }}
+    {{ if .Params.code }}
+      <div class="bg-primary-50 rounded-xl p-6 mb-6 text-center" id="code-{{ .File.UniqueID }}">
+        {{ if .Params.verified }}<span class="inline-flex items-center px-3 py-1 text-sm font-medium text-accent-700 bg-accent-100 rounded-full mb-3">✓ 已验证</span>{{ end }}
+        <code class="text-2xl font-mono font-bold text-gray-900 tracking-wider">{{ .Params.code }}</code>
+        <div class="mt-4">
+          <button class="px-8 py-3 bg-primary-600 text-white font-medium rounded-xl hover:bg-primary-700 transition-colors" data-code="{{ .Params.code }}" data-box-id="code-{{ .File.UniqueID }}" onclick="copyCode(this.dataset.code, this.dataset.boxId)">
+            <span class="copy-text">复制优惠码</span>
+          </button>
+        </div>
+      </div>
+    {{ end }}
+    {{ with .Params.discount }}<p class="text-lg font-semibold text-primary-600 mb-2">折扣: {{ . }}</p>{{ end }}
+    {{ with .Params.expiry_date }}<p class="text-sm text-gray-500">有效期至: {{ . }}</p>{{ end }}
+    {{ with .Params.affiliate_link }}
+      <a href="{{ . }}" class="mt-4 block text-center px-8 py-3 bg-accent-500 text-white font-medium rounded-xl hover:bg-accent-600 transition-colors" target="_blank" rel="nofollow sponsored">使用优惠 →</a>
+    {{ end }}
+  </div>
+  {{ with .Content }}<div class="bg-white rounded-xl shadow-card p-6 sm:p-8 mt-6 prose prose-lg max-w-none">{{ . }}</div>{{ end }}
+</article>
+{{ end }}

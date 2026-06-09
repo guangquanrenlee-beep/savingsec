@@ -1,0 +1,28 @@
+{{ $title := .Title }}
+{{ if ne .Title .Site.Title }}{{ $title = printf "%s | %s" .Title .Site.Title }}{{ end }}
+{{ $desc := .Params.description | default .Site.Params.description | truncate 160 }}
+
+<title>{{ $title }}</title>
+<meta name="description" content="{{ $desc }}">
+<meta name="keywords" content="{{ with .Params.tags }}{{ delimit . "," }}{{ end }}">
+<meta name="author" content="{{ .Site.Params.author }}">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="zh_CN">
+<meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
+<meta property="og:title" content="{{ $title }}">
+<meta property="og:description" content="{{ $desc }}">
+<meta property="og:url" content="{{ .Permalink }}">
+<meta property="og:site_name" content="{{ .Site.Title }}">
+{{ with .Params.image }}<meta property="og:image" content="{{ . | absURL }}">{{ else }}<meta property="og:image" content="{{ .Site.Params.ogImage | absURL }}">{{ end }}
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ $title }}">
+<meta name="twitter:description" content="{{ $desc }}">
+{{ with .Site.Params.social.twitter }}<meta name="twitter:site" content="{{ . }}">{{ end }}
+
+{{ if .IsPage }}
+  <meta property="article:published_time" content="{{ .Date.Format "2006-01-02T15:04:05-07:00" }}">
+  <meta property="article:modified_time" content="{{ .Lastmod.Format "2006-01-02T15:04:05-07:00" }}">
+{{ end }}

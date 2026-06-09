@@ -1,0 +1,16 @@
+{{- $products := where .Site.RegularPages "Section" "product" -}}
+{{- $coupons := where .Site.RegularPages "Section" "coupon" -}}
+{{- $deals := where .Site.RegularPages "Section" "deal" -}}
+{{- $reviews := where .Site.RegularPages "Section" "review" -}}
+{{- $blogs := where .Site.RegularPages "Section" "blog" -}}
+{{- $all := union (union (union (union $products $coupons) $deals) $reviews) $blogs -}}
+[{{ range $i, $page := $all }}{{ if $i }},{{ end }}
+{
+  "title": {{ $page.Title | jsonify }},
+  "url": {{ $page.RelPermalink | jsonify }},
+  "section": {{ $page.Section | jsonify }},
+  "description": {{ $page.Params.description | default $page.Summary | jsonify }},
+  "brand": {{ $page.Params.brand | jsonify }},
+  "category": {{ $page.Params.category | jsonify }}
+}{{ end }}
+]

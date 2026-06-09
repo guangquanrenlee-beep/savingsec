@@ -1,0 +1,36 @@
+{{ define "main" }}
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+  <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-2">{{ .Title }}</h1>
+  <p class="text-lg text-gray-600 mb-8">{{ .Title }} 的所有商品与优惠</p>
+  
+  {{ $products := where .Pages "Section" "product" }}
+  {{ if $products }}
+    <h2 class="text-xl font-bold text-gray-900 mb-4">商品</h2>
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mb-12">
+      {{ range $products }}
+        {{ partial "product-card" (dict "product" .) }}
+      {{ end }}
+    </div>
+  {{ end }}
+
+  {{ $coupons := where .Pages "Section" "coupon" }}
+  {{ if $coupons }}
+    <h2 class="text-xl font-bold text-gray-900 mb-4">优惠券</h2>
+    <div class="grid gap-4 mb-12">
+      {{ range $coupons }}
+        {{ partial "coupon-card" (dict "coupon" .) }}
+      {{ end }}
+    </div>
+  {{ end }}
+
+  {{ $deals := where .Pages "Section" "deal" }}
+  {{ if $deals }}
+    <h2 class="text-xl font-bold text-gray-900 mb-4">促销</h2>
+    <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      {{ range $deals }}
+        {{ partial "deal-card" (dict "deal" .) }}
+      {{ end }}
+    </div>
+  {{ end }}
+</div>
+{{ end }}

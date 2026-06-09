@@ -1,0 +1,76 @@
+baseURL: "https://chanpintuijian.com/"
+title: "ProductPick"
+languageCode: "zh-CN"
+defaultContentLanguage: "zh"
+
+enableRobotsTXT: true
+enableGitInfo: true
+enableEmoji: true
+paginate: 20
+
+summaryLength: 160
+
+permalinks:
+  product: "/product/:slug/"
+  coupon: "/coupon/:slug/"
+  deal: "/deal/:slug/"
+  review: "/review/:slug/"
+  blog: "/blog/:slug/"
+  brand: "/brand/:slug/"
+  category: "/category/:slug/"
+
+taxonomies:
+  brand: "brand"
+  category: "category"
+  tag: "tag"
+
+outputs:
+  home: [HTML, RSS, JSON]
+  section: [HTML, RSS]
+  taxonomy: [HTML, RSS]
+  term: [HTML, RSS]
+
+outputFormats:
+  JSON:
+    mediaType: "application/json"
+    baseName: "search"
+    isPlainText: true
+    notAlternative: true
+
+params:
+  siteName: "ProductPick"
+  description: "专业商品评测、优惠券与促销信息聚合平台"
+  author: "ProductPick Team"
+  email: "contact@chanpintuijian.com"
+  twitter: "@productpick"
+  logo: "/images/logo.svg"
+  ogImage: "/images/og-default.jpg"
+
+  affiliate:
+    disclaimer: "我们可能会通过链接赚取佣金，这不会影响您的购买价格。"
+    nofollowLinks: true
+
+  search:
+    enabled: true
+    type: "pagefind"
+
+  seo:
+    generateJSONLD: true
+    generateSitemap: true
+
+  social:
+    twitter: "@productpick"
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+    extensions:
+      tableOfContents:
+        startLevel: 2
+        endLevel: 4
+
+module:
+  hugoVersion:
+    extended: false
+    min: "0.120.0"

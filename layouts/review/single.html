@@ -1,0 +1,32 @@
+{{ define "main" }}
+<article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+  <nav class="flex items-center text-sm text-gray-500 mb-6">
+    <a href="/" class="hover:text-primary-600">首页</a><span class="mx-2">/</span>
+    <a href="/review/" class="hover:text-primary-600">评测</a><span class="mx-2">/</span>
+    <span class="text-gray-900">{{ .Title }}</span>
+  </nav>
+  <header class="mb-8">
+    <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">{{ .Title }}</h1>
+    {{ with .Params.description }}<p class="text-lg text-gray-600 mb-4">{{ . }}</p>{{ end }}
+    <div class="flex items-center gap-4 text-sm text-gray-500">
+      <span>{{ .Params.author }}</span>
+      <span>最后更新: {{ .Params.last_updated | time.Format "2006年1月2日" }}</span>
+      {{ with .Params.rating }}
+        <div class="flex items-center text-yellow-400">{{ range seq 5 }}{{ if le . $.rating }}★{{ else }}☆{{ end }}{{ end }} <span class="ml-1 text-gray-500">{{ . }}/5</span></div>
+      {{ end }}
+    </div>
+  </header>
+  <div class="bg-white rounded-xl shadow-card p-6 sm:p-8 prose prose-lg max-w-none">
+    {{ .Content }}
+  </div>
+  {{ with .Params.related_product }}
+    <div class="mt-8">
+      <h2 class="text-xl font-bold text-gray-900 mb-4">相关产品</h2>
+      {{ $product := where (where $.Site.RegularPages "Section" "product") "Params.slug" . }}
+      {{ with index $product 0 }}
+        {{ partial "product-card" (dict "product" .) }}
+      {{ end }}
+    </div>
+  {{ end }}
+</article>
+{{ end }}

@@ -1,0 +1,11 @@
+{{ define "main" }}
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+  <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-2">促销活动</h1>
+  <p class="text-lg text-gray-600 mb-8">限时折扣，不容错过</p>
+  <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+    {{ range .Pages }}
+      {{ partial "deal-card" (dict "deal" .) }}
+    {{ end }}
+  </div>
+</div>
+{{ end }}

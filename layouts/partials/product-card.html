@@ -1,0 +1,60 @@
+{{ $product := .product }}
+<article class="card bg-white rounded-xl shadow-card hover:shadow-card-hover transition-all duration-300 overflow-hidden group" itemscope itemtype="https://schema.org/Product">
+  <div class="p-5">
+    <!-- Header -->
+    <div class="flex items-start gap-4 mb-4">
+      {{ with $product.Params.image }}
+        <img src="{{ . }}" alt="{{ $product.Title }}" class="w-16 h-16 object-cover rounded-lg flex-shrink-0" loading="lazy" itemprop="image">
+      {{ else }}
+        <div class="w-16 h-16 bg-primary-50 rounded-lg flex items-center justify-center flex-shrink-0">
+          <span class="text-2xl">📦</span>
+        </div>
+      {{ end }}
+      <div>
+        {{ with $product.Params.brand }}
+          <a href="/brand/{{ . | urlize }}/" class="text-xs font-medium text-primary-600 hover:text-primary-700" itemprop="brand">{{ . }}</a>
+        {{ end }}
+        <h3 class="text-base font-semibold text-gray-900 line-clamp-1" itemprop="name">
+          <a href="{{ $product.RelPermalink }}" class="hover:text-primary-600">{{ $product.Title }}</a>
+        </h3>
+      </div>
+    </div>
+    <!-- Rating -->
+    {{ with $product.Params.rating }}
+      {{ $rating := . }}
+      <div class="flex items-center mb-3">
+        <div class="flex items-center text-yellow-400">
+          {{ range seq 5 }}
+            {{ if le . $rating }}★{{ else }}☆{{ end }}
+          {{ end }}
+        </div>
+        <span class="ml-2 text-sm text-gray-500">{{ $rating }}/5</span>
+      </div>
+    {{ end }}
+    <!-- Description -->
+    {{ with $product.Params.description }}
+      <p class="text-sm text-gray-600 line-clamp-2 mb-4" itemprop="description">{{ . }}</p>
+    {{ end }}
+    <!-- Price -->
+    <div class="flex items-center gap-2 mb-4">
+      {{ with $product.Params.price }}
+        <span class="text-lg font-bold text-accent-600" itemprop="price">{{ . }}</span>
+      {{ end }}
+      {{ with $product.Params.original_price }}
+        <span class="text-sm text-gray-400 line-through">{{ . }}</span>
+      {{ end }}
+    </div>
+    <!-- CTA -->
+    {{ with $product.Params.affiliate_link }}
+      <a href="{{ . }}" class="block w-full text-center px-4 py-2.5 bg-primary-600 text-white font-medium rounded-lg hover:bg-primary-700 transition-colors" target="_blank" rel="nofollow sponsored" itemprop="url">
+        查看优惠 →
+      </a>
+    {{ end }}
+    <!-- Tags -->
+    <div class="flex flex-wrap gap-1 mt-3">
+      {{ range first 3 $product.Params.category }}
+        <a href="/category/{{ . | urlize }}/" class="px-2 py-0.5 text-xs bg-gray-100 text-gray-600 rounded-full hover:bg-primary-50 hover:text-primary-600 transition-colors">{{ . }}</a>
+      {{ end }}
+    </div>
+  </div>
+</article>

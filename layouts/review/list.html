@@ -1,0 +1,27 @@
+{{ define "main" }}
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+  <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-2">产品评测</h1>
+  <p class="text-lg text-gray-600 mb-8">深度评测，真实体验</p>
+  <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+    {{ range .Pages }}
+      <article class="card bg-white rounded-xl shadow-card hover:shadow-card-hover transition-all overflow-hidden">
+        <div class="p-5">
+          {{ with .Params.brand }}<a href="/brand/{{ . | urlize }}/" class="text-xs font-medium text-primary-600 hover:text-primary-700">{{ . }}</a>{{ end }}
+          <h3 class="text-lg font-semibold text-gray-900 mt-1 mb-2"><a href="{{ .RelPermalink }}" class="hover:text-primary-600">{{ .Title }}</a></h3>
+          {{ with .Params.description }}<p class="text-sm text-gray-600 line-clamp-2 mb-3">{{ . }}</p>{{ end }}
+          {{ with .Params.rating }}
+            <div class="flex items-center text-yellow-400 mb-3">
+              {{ range seq 5 }}{{ if le . $.rating }}★{{ else }}☆{{ end }}{{ end }}
+              <span class="ml-2 text-sm text-gray-500">{{ . }}/5</span>
+            </div>
+          {{ end }}
+          <div class="flex items-center justify-between text-sm text-gray-500">
+            <span>{{ .Params.author }}</span>
+            <span>{{ .Params.last_updated | time.Format "2006-01-02" }}</span>
+          </div>
+        </div>
+      </article>
+    {{ end }}
+  </div>
+</div>
+{{ end }}

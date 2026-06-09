@@ -1,0 +1,39 @@
+{{ $coupon := .coupon }}
+<article class="card bg-white rounded-xl shadow-card hover:shadow-card-hover transition-all duration-300 p-5">
+  <div class="flex flex-col sm:flex-row sm:items-center gap-4">
+    <!-- Discount Badge -->
+    <div class="flex-shrink-0 w-20 h-20 bg-primary-50 rounded-xl flex flex-col items-center justify-center">
+      <span class="text-lg font-bold text-primary-600">{{ $coupon.Params.discount }}</span>
+      {{ if eq $coupon.Params.discount_type "percentage" }}<span class="text-xs text-gray-500">% OFF</span>{{ end }}
+    </div>
+    <!-- Content -->
+    <div class="flex-1 min-w-0">
+      <h3 class="text-base font-semibold text-gray-900 line-clamp-1">
+        <a href="{{ $coupon.RelPermalink }}" class="hover:text-primary-600">{{ $coupon.Title }}</a>
+      </h3>
+      {{ with $coupon.Params.brand }}
+        <a href="/brand/{{ . | urlize }}/" class="text-sm text-primary-600 hover:text-primary-700">{{ . }}</a>
+      {{ end }}
+      {{ with $coupon.Params.description }}<p class="text-sm text-gray-600 line-clamp-1 mt-1">{{ . }}</p>{{ end }}
+    </div>
+    <!-- Code Box -->
+    {{ if $coupon.Params.code }}
+      <div class="flex-shrink-0" id="code-{{ $coupon.File.UniqueID }}">
+        {{ if $coupon.Params.verified }}
+          <span class="inline-flex items-center px-2 py-0.5 text-xs font-medium text-accent-700 bg-accent-50 rounded-full mb-2">✓ 已验证</span>
+        {{ end }}
+        <div class="flex items-center gap-2">
+          <code class="px-3 py-2 bg-gray-100 text-gray-900 font-mono text-sm rounded-lg border-2 border-dashed border-gray-300">{{ $coupon.Params.code }}</code>
+          <button class="px-3 py-2 bg-primary-600 text-white text-sm font-medium rounded-lg hover:bg-primary-700 transition-colors" onclick="copyCode('{{ $coupon.Params.code }}', 'code-{{ $coupon.File.UniqueID }}')">
+            <span class="copy-text">复制</span>
+          </button>
+        </div>
+      </div>
+    {{ end }}
+  </div>
+  {{ with $coupon.Params.expiry_date }}
+    <div class="mt-3 pt-3 border-t border-gray-100 text-xs text-gray-500">
+      有效期至: {{ . }}
+    </div>
+  {{ end }}
+</article>

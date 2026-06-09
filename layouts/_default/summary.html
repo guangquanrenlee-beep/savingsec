@@ -1,0 +1,9 @@
+<article class="card overflow-hidden bg-white rounded-xl shadow-card hover:shadow-card-hover transition-shadow">
+  <div class="p-5">
+    <h3 class="text-lg font-semibold text-gray-900 mb-2">
+      <a href="{{ .RelPermalink }}" class="hover:text-primary-600">{{ .Title }}</a>
+    </h3>
+    {{ with .Params.description }}<p class="text-sm text-gray-600 line-clamp-2 mb-3">{{ . }}</p>{{ end }}
+    <a href="{{ .RelPermalink }}" class="text-sm font-medium text-primary-600 hover:text-primary-700">查看详情 →</a>
+  </div>
+</article>
