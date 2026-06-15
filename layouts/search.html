@@ -1,0 +1,205 @@
+{{ define "main" }}
+<div class="max-w-3xl mx-auto px-6 py-10">
+  <h1 class="text-2xl font-semibold text-brand mb-6">{{ i18n "search_results" }}</h1>
+  <div class="mb-6">
+    <input type="text" id="search-input" placeholder="{{ i18n "search_all" }}" class="w-full px-4 py-3 border border-neutral-border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand text-[15px]">
+  </div>
+  <!-- Filters -->
+  <div class="flex flex-wrap gap-2 mb-6">
+    <button class="search-filter active px-3 py-1.5 text-[13px] bg-brand text-white rounded-lg" data-filter="all">{{ i18n "all" }}</button>
+    <button class="search-filter px-3 py-1.5 text-[13px] bg-white border border-neutral-border text-neutral-text rounded-lg hover:border-brand hover:text-brand transition-colors" data-filter="product">{{ i18n "nav_products" }}</button>
+    <button class="search-filter px-3 py-1.5 text-[13px] bg-white border border-neutral-border text-neutral-text rounded-lg hover:border-brand hover:text-brand transition-colors" data-filter="coupon">{{ i18n "nav_coupons" }}</button>
+    <button class="search-filter px-3 py-1.5 text-[13px] bg-white border border-neutral-border text-neutral-text rounded-lg hover:border-brand hover:text-brand transition-colors" data-filter="deal">{{ i18n "nav_deals" }}</button>
+    <button class="search-filter px-3 py-1.5 text-[13px] bg-white border border-neutral-border text-neutral-text rounded-lg hover:border-brand hover:text-brand transition-colors" data-filter="review">{{ i18n "nav_reviews" }}</button>
+    <button class="search-filter px-3 py-1.5 text-[13px] bg-white border border-neutral-border text-neutral-text rounded-lg hover:border-brand hover:text-brand transition-colors" data-filter="blog">{{ i18n "nav_articles" }}</button>
+  </div>
+  <div id="search-stats" class="text-sm text-neutral-muted mb-4"></div>
+  <div id="search-results" class="space-y-4">
+    <div class="text-center py-12 text-neutral-muted">
+      <svg class="w-12 h-12 mx-auto mb-4 text-neutral-border" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+      <p>{{ i18n "search_placeholder_long" }}</p>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  let searchData = [];
+  let activeFilter = 'all';
+  let dataReady = false;
+  let pendingQuery = '';
+
+  const sectionLabels = {
+    product: '{{ i18n "nav_products" }}',
+    coupon: '{{ i18n "nav_coupons" }}',
+    deal: '{{ i18n "nav_deals" }}',
+    review: '{{ i18n "nav_reviews" }}',
+    blog: '{{ i18n "nav_articles" }}'
+  };
+
+  const sectionIcons = {
+    product: '',
+    coupon: '',
+    deal: '',
+    review: '',
+    blog: ''
+  };
+
+  const params = new URLSearchParams(window.location.search);
+  const query = params.get('q') || '';
+  const input = document.getElementById('search-input');
+
+  fetch('/search.json')
+    .then(r => r.json())
+    .then(data => {
+      searchData = data;
+      dataReady = true;
+      if (pendingQuery) {
+        performSearch(pendingQuery);
+        pendingQuery = '';
+      }
+    })
+    .catch(err => {
+      console.error('Failed to load search index:', err);
+      document.getElementById('search-results').innerHTML = '<p class="text-center text-red-500">Failed to load search index.</p>';
+    });
+
+  if (input && query) {
+    input.value = query;
+    if (dataReady) {
+      performSearch(query);
+    } else {
+      pendingQuery = query;
+    }
+  }
+
+  if (input) {
+    let debounceTimer;
+    input.addEventListener('input', (e) => {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(() => {
+        const q = e.target.value.trim();
+        if (q.length > 0) {
+          performSearch(q);
+          history.replaceState(null, '', '/search/?q=' + encodeURIComponent(q));
+        } else {
+          document.getElementById('search-results').innerHTML = '<div class="text-center py-12 text-neutral-muted"><svg class="w-12 h-12 mx-auto mb-4 text-neutral-border" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg><p>{{ i18n "search_placeholder_long" }}</p></div>';
+          document.getElementById('search-stats').textContent = '';
+        }
+      }, 300);
+    });
+  }
+
+  document.querySelectorAll('.search-filter').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.search-filter').forEach(b => {
+        b.classList.remove('bg-brand', 'text-white');
+        b.classList.add('bg-white', 'border', 'border-neutral-border', 'text-neutral-text');
+      });
+      btn.classList.remove('bg-white', 'border', 'border-neutral-border', 'text-neutral-text');
+      btn.classList.add('bg-brand', 'text-white');
+      activeFilter = btn.dataset.filter;
+      const q = input.value.trim();
+      if (q.length > 0) performSearch(q);
+    });
+  });
+
+  function highlightText(text, query) {
+    if (!query) return text;
+    const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const regex = new RegExp('(' + escaped + ')', 'gi');
+    return text.replace(regex, '<mark class="bg-yellow-200 text-brand font-medium rounded px-0.5">$1</mark>');
+  }
+
+  function getSnippet(content, query, maxLen) {
+    if (!content) return '';
+    const lowerContent = content.toLowerCase();
+    const lowerQuery = query.toLowerCase();
+    const idx = lowerContent.indexOf(lowerQuery);
+    if (idx === -1) return content.substring(0, maxLen) + '...';
+    const start = Math.max(0, idx - 60);
+    const end = Math.min(content.length, idx + query.length + 120);
+    let snippet = (start > 0 ? '...' : '') + content.substring(start, end) + (end < content.length ? '...' : '');
+    return snippet;
+  }
+
+  function performSearch(query) {
+    const q = query.toLowerCase();
+    const queryTerms = q.split(/\s+/).filter(t => t.length > 1);
+
+    let results = searchData.filter(item => {
+      if (activeFilter !== 'all' && item.section !== activeFilter) return false;
+      const title = (item.title || '').toLowerCase();
+      const description = (item.description || '').toLowerCase();
+      const brand = (item.brand || '').toLowerCase();
+      const category = (item.category || []).join(' ').toLowerCase();
+      const content = (item.content || '').toLowerCase();
+      const searchText = title + ' ' + description + ' ' + brand + ' ' + category + ' ' + content;
+      return queryTerms.every(term => searchText.includes(term));
+    });
+
+    results.forEach(item => {
+      let score = 0;
+      const title = (item.title || '').toLowerCase();
+      const description = (item.description || '').toLowerCase();
+      const brand = (item.brand || '').toLowerCase();
+      const content = (item.content || '').toLowerCase();
+
+      if (title.includes(q)) score += 100;
+      if (title === q) score += 200;
+      queryTerms.forEach(term => {
+        if (title.includes(term)) score += 50;
+        if (brand.includes(term)) score += 30;
+        if (description.includes(term)) score += 20;
+        if (content.includes(term)) score += 5;
+      });
+      item._score = score;
+    });
+
+    results.sort((a, b) => b._score - a._score);
+
+    const container = document.getElementById('search-results');
+    const stats = document.getElementById('search-stats');
+
+    if (results.length === 0) {
+      stats.textContent = '';
+      container.innerHTML = '<div class="text-center py-12 text-neutral-muted"><p>{{ i18n "no_results_desc" }}</p></div>';
+      return;
+    }
+
+    stats.textContent = '{{ i18n "found_results" }} ' + results.length + ' {{ i18n "results" }}';
+    container.innerHTML = results.map(item => {
+      const icon = sectionIcons[item.section] || '';
+      const label = sectionLabels[item.section] || item.section;
+      let badge = '';
+      if (item.section === 'product' && item.price) {
+        badge = '<span class="text-sm font-medium text-accent">' + item.price + '</span>';
+      } else if (item.section === 'coupon' && item.discount) {
+        badge = '<span class="text-sm font-medium text-brand">' + item.discount + '</span>';
+      } else if (item.section === 'deal' && item.price) {
+        badge = '<span class="text-sm font-medium text-accent">' + item.price + '</span>';
+      }
+      const snippet = getSnippet(item.content || item.description || '', query, 200);
+      const highlightedTitle = highlightText(item.title, query);
+      const highlightedSnippet = highlightText(snippet, query);
+      return '<article class="bg-white rounded-lg shadow-card p-5 hover:shadow-card-hover transition-shadow">' +
+        '<div class="flex items-start gap-4">' +
+          '<div class="flex-shrink-0 w-10 h-10 bg-neutral-light rounded-lg flex items-center justify-center text-lg">' + icon + '</div>' +
+          '<div class="flex-1 min-w-0">' +
+            '<div class="flex items-center gap-2 mb-1">' +
+              '<span class="px-2 py-0.5 text-[11px] bg-neutral-light text-neutral-muted rounded-full">' + label + '</span>' +
+              (item.brand ? '<span class="text-[12px] text-neutral-muted">' + item.brand + '</span>' : '') +
+            '</div>' +
+            '<h3 class="text-[15px] font-semibold text-brand mb-1">' +
+              '<a href="' + item.url + '" class="hover:text-accent transition-colors">' + highlightedTitle + '</a>' +
+            '</h3>' +
+            (highlightedSnippet ? '<p class="text-sm text-neutral-text line-clamp-3">' + highlightedSnippet + '</p>' : '') +
+            '<div class="flex items-center gap-2 mt-2">' + badge + '</div>' +
+          '</div>' +
+        '</div>' +
+      '</article>';
+    }).join('');
+  }
+})();
+</script>
+{{ end }}

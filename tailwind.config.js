@@ -4,13 +4,38 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: { 50:'#eff6ff',100:'#dbeafe',200:'#bfdbfe',300:'#93c5fd',400:'#60a5fa',500:'#3b82f6',600:'#2563eb',700:'#1d4ed8',800:'#1e40af',900:'#1e3a8a' },
-        accent: { 50:'#f0fdf4',100:'#dcfce7',200:'#bbf7d0',300:'#86efac',400:'#4ade80',500:'#22c55e',600:'#16a34a',700:'#15803d' },
-        warning: { 50:'#fefce8',100:'#fef9c3',400:'#facc15',500:'#eab308',600:'#ca8a04' },
-        danger: { 50:'#fef2f2',100:'#fee2e2',400:'#f87171',500:'#ef4444',600:'#dc2626' },
+        brand: {
+          DEFAULT: '#192945',
+          light: '#2a3f5f',
+          dark: '#0f1d32',
+        },
+        accent: {
+          DEFAULT: '#e67e22',
+          light: '#f5a623',
+        },
+        neutral: {
+          white: '#ffffff',
+          light: '#f7f8fa',
+          border: '#e8ebf0',
+          text: '#444444',
+          muted: '#888888',
+        },
       },
-      fontFamily: { sans: ['Inter','system-ui','sans-serif'] },
-      boxShadow: { card:'0 1px 3px rgba(0,0,0,.1), 0 1px 2px rgba(0,0,0,.06)', 'card-hover':'0 10px 15px -3px rgba(0,0,0,.1), 0 4px 6px -2px rgba(0,0,0,.05)' },
+      fontFamily: {
+        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        heading: ['Montserrat', 'Open Sans', 'Arial', 'sans-serif'],
+        body: ['Roboto', 'Open Sans', 'Arial', 'sans-serif'],
+      },
+      borderRadius: { DEFAULT: '10px', lg: '10px', xl: '10px', '2xl': '10px' },
+      maxWidth: { content: '1280px' },
+      spacing: { '13': '3.25rem' },
+      boxShadow: {
+        card: '0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04)',
+        'card-hover': '0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04)',
+        'button-brand': '0 4px 12px rgba(25,41,69,0.3)',
+        'button-accent': '0 4px 12px rgba(230,126,34,0.3)',
+        dropdown: '0 10px 30px rgba(0,0,0,0.12)',
+      },
     },
   },
   plugins: [],

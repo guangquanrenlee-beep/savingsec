@@ -1,7 +1,46 @@
-baseURL: "https://chanpintuijian.com/"
-title: "ProductPick"
-languageCode: "zh-CN"
-defaultContentLanguage: "zh"
+baseURL: "https://savingsec.com/"
+title: "SavingSec"
+languageCode: "en-US"
+defaultContentLanguage: "en"
+defaultContentLanguageInSubdir: false
+
+languages:
+  en:
+    languageName: "English"
+    languageCode: "en-US"
+    weight: 1
+    params:
+      siteName: "SavingSec"
+  fr:
+    languageName: "Français"
+    languageCode: "fr-FR"
+    weight: 2
+    params:
+      siteName: "SavingSec"
+  de:
+    languageName: "Deutsch"
+    languageCode: "de-DE"
+    weight: 3
+    params:
+      siteName: "SavingSec"
+  ja:
+    languageName: "日本語"
+    languageCode: "ja-JP"
+    weight: 4
+    params:
+      siteName: "SavingSec"
+  pt:
+    languageName: "Português"
+    languageCode: "pt-BR"
+    weight: 5
+    params:
+      siteName: "SavingSec"
+  es:
+    languageName: "Español"
+    languageCode: "es-ES"
+    weight: 6
+    params:
+      siteName: "SavingSec"
 
 enableRobotsTXT: true
 enableGitInfo: true
@@ -38,16 +77,15 @@ outputFormats:
     notAlternative: true
 
 params:
-  siteName: "ProductPick"
-  description: "专业商品评测、优惠券与促销信息聚合平台"
-  author: "ProductPick Team"
-  email: "contact@chanpintuijian.com"
+  description: "Professional product reviews, coupon codes & deal aggregation platform"
+  author: "SavingSec Team"
+  email: "Assnent@gmail.com"
   twitter: "@productpick"
   logo: "/images/logo.svg"
   ogImage: "/images/og-default.jpg"
 
   affiliate:
-    disclaimer: "我们可能会通过链接赚取佣金，这不会影响您的购买价格。"
+    disclaimer: "We may earn a commission through links, which does not affect your purchase price."
     nofollowLinks: true
 
   search:

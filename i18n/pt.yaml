@@ -1,0 +1,237 @@
+- id: nav_home
+  translation: "Início"
+- id: nav_coupons
+  translation: "Cupons"
+- id: nav_reviews
+  translation: "Avaliações"
+- id: nav_toplist
+  translation: "Top Picks"
+- id: nav_tips
+  translation: "Dicas"
+- id: nav_deals
+  translation: "Promoções"
+- id: nav_products
+  translation: "Produtos"
+- id: nav_articles
+  translation: "Artigos"
+- id: nav_brands
+  translation: "Marcas"
+- id: nav_categories
+  translation: "Categorias"
+- id: language_switcher
+  translation: "Idioma"
+- id: date_format
+  translation: "2 de Jan de 2006"
+- id: search_placeholder
+  translation: "Pesquisar..."
+- id: search_all
+  translation: "Pesquisar todos os produtos, cupons e artigos..."
+- id: hero_title
+  translation: "Descubra produtos de qualidade · Economize com confiança"
+- id: hero_subtitle
+  translation: "Análises de especialistas + Ofertas reais + Seleções curadas"
+- id: read_more
+  translation: "Leia mais"
+- id: back_to_home
+  translation: "Voltar ao início"
+- id: latest_products
+  translation: "Últimos produtos"
+- id: latest_products_subtitle
+  translation: "Seleções do editor"
+- id: latest_coupons
+  translation: "Últimos cupons"
+- id: latest_coupons_subtitle
+  translation: "Códigos promo verificados"
+- id: latest_deals
+  translation: "Últimas promoções"
+- id: latest_deals_subtitle
+  translation: "Não perca"
+- id: latest_reviews
+  translation: "Últimas análises"
+- id: latest_articles
+  translation: "Últimos artigos"
+- id: view_all
+  translation: "Ver todos"
+- id: related_products
+  translation: "Recomendações"
+- id: copy_code
+  translation: "Copiar código"
+- id: copied
+  translation: "Copiado!"
+- id: expired
+  translation: "Expirado"
+- id: expires
+  translation: "Válido até"
+- id: original_price
+  translation: "Preço original"
+- id: deal_price
+  translation: "Preço promocional"
+- id: save
+  translation: "Economize"
+- id: rating
+  translation: "Avaliação"
+- id: pros
+  translation: "Prós"
+- id: cons
+  translation: "Contras"
+- id: verdict
+  translation: "Veredicto"
+- id: affiliate_disclaimer
+  translation: "Podemos ganhar comissões através de links, sem afetar o seu preço de compra."
+- id: no_products
+  translation: "Sem produtos"
+- id: no_coupons
+  translation: "Sem cupons"
+- id: no_deals
+  translation: "Sem promoções"
+- id: page_not_found
+  translation: "Página não encontrada"
+- id: page_not_found_desc
+  translation: "Desculpe, a página que procura não existe."
+- id: items
+  translation: "itens"
+- id: browse_categories
+  translation: "Navegar categorias"
+- id: subscribe_title
+  translation: "Assinar ofertas"
+- id: subscribe_desc
+  translation: "Seleções semanais e ofertas exclusivas direto no seu e-mail"
+- id: subscribe_placeholder
+  translation: "Digite seu e-mail"
+- id: subscribe
+  translation: "Assinar"
+- id: view_deal
+  translation: "Ver oferta →"
+- id: grab_now
+  translation: "Comprar agora →"
+- id: verified
+  translation: "Verificado"
+- id: time_limited
+  translation: "Tempo limitado"
+- id: last_updated
+  translation: "Última atualização"
+- id: product_intro
+  translation: "Visão geral do produto"
+- id: pros_cons
+  translation: "Prós e Contras"
+- id: related_coupons
+  translation: "Cupons relacionados"
+- id: related_deals
+  translation: "Promoções relacionadas"
+- id: faq
+  translation: "FAQ"
+- id: related_products_section
+  translation: "Produtos relacionados"
+- id: product_summary
+  translation: "Resumo do produto"
+- id: table_of_contents
+  translation: "Índice"
+- id: related_product
+  translation: "Produto relacionado"
+- id: use_coupon
+  translation: "Usar cupom →"
+- id: discount_label
+  translation: "Desconto"
+- id: home
+  translation: "Início"
+- id: breadcrumb_products
+  translation: "Produtos"
+- id: footer_about
+  translation: "Sobre"
+- id: footer_about_us
+  translation: "Sobre nós"
+- id: footer_contact
+  translation: "Contato"
+- id: footer_privacy
+  translation: "Política de privacidade"
+- id: footer_affiliate
+  translation: "Divulgação de afiliados"
+- id: footer_rights
+  translation: "Todos os direitos reservados"
+- id: footer_tagline
+  translation: "Plataforma profissional de análises e promoções de produtos"
+- id: footer_legal
+  translation: "Legal"
+- id: footer_cookie
+  translation: "Política de cookies"
+- id: footer_disclaimer
+  translation: "Aviso legal"
+- id: footer_refund
+  translation: "Reembolso & Suporte"
+- id: contact_email_label
+  translation: "Contato"
+# Review Page AI Optimization
+- id: rating
+  translation: "Avaliação"
+- id: current_price
+  translation: "Preço atual"
+- id: recommendation_level
+  translation: "Nível de recomendação"
+- id: recommendation_advice
+  translation: "Conselho de compra"
+- id: suitable_for
+  translation: "Adequado para"
+- id: not_suitable_for
+  translation: "Não adequado para"
+- id: final_verdict
+  translation: "Veredito final"
+- id: original_price
+  translation: "Preço original"
+- id: cat_electronics
+  translation: "Eletrônicos"
+- id: cat_home
+  translation: "Casa & Vida"
+- id: cat_beauty
+  translation: "Beleza & Cuidados"
+- id: cat_fashion
+  translation: "Moda"
+- id: cat_food
+  translation: "Alimentos & Bebidas"
+- id: cat_sports
+  translation: "Esportes & Ao ar livre"
+- id: cat_books
+  translation: "Livros & Papelaria"
+- id: cat_toys
+  translation: "Bebê & Brinquedos"
+- id: all_brands
+  translation: "Todas as marcas"
+- id: search_results
+  translation: "Resultados da pesquisa"
+- id: all
+  translation: "Todos"
+- id: no_results
+  translation: "Nenhum resultado encontrado"
+- id: no_results_desc
+  translation: "Nenhum resultado correspondente. Tente outras palavras-chave."
+- id: found_results
+  translation: "Encontrado"
+- id: results
+  translation: "resultados"
+- id: search_placeholder_long
+  translation: "Digite palavras-chave para pesquisar"
+- id: site_description
+  translation: "Plataforma profissional de análises de produtos, cupons e promoções"
+- id: reviews_title
+  translation: "Análises de produtos"
+- id: reviews_subtitle
+  translation: "Análises detalhadas, experiências reais"
+- id: articles_title
+  translation: "Artigos"
+- id: articles_subtitle
+  translation: "Guias de compra & dicas práticas"
+- id: deals_title
+  translation: "Promoções"
+- id: deals_subtitle
+  translation: "Ofertas por tempo limitado"
+- id: coupons_title
+  translation: "Central de cupons"
+- id: coupons_subtitle
+  translation: "Códigos promocionais exclusivos verificados"
+- id: category_products_desc
+  translation: "Todos os produtos desta categoria"
+- id: brand_products_desc
+  translation: " produtos e ofertas"
+- id: brand_coupons
+  translation: "Cupons"
+- id: view_details
+  translation: "Ver detalhes →"

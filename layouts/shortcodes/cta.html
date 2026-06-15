@@ -1,0 +1,11 @@
+{{- $url := .Get "url" -}}
+{{- $text := .Get "text" | default "View Deal →" -}}
+{{- $type := .Get "type" | default "primary" -}}
+
+{{- if eq $type "accent" -}}
+<a href="{{ $url }}" class="btn-accent" target="_blank" rel="nofollow sponsored" style="display:inline-block;padding:0.75rem 2rem;font-size:16px;font-weight:600;border-radius:10px;text-decoration:none;transition:transform 0.2s linear,box-shadow 0.2s linear;cursor:pointer;text-align:center;">{{ $text }}</a>
+{{- else if eq $type "outline" -}}
+<a href="{{ $url }}" class="btn-secondary" target="_blank" rel="nofollow sponsored" style="display:inline-block;padding:0.75rem 2rem;font-size:16px;font-weight:600;border-radius:10px;text-decoration:none;transition:transform 0.2s linear,box-shadow 0.2s linear;cursor:pointer;text-align:center;">{{ $text }}</a>
+{{- else -}}
+<a href="{{ $url }}" class="btn-primary" target="_blank" rel="nofollow sponsored" style="display:inline-block;padding:0.75rem 2rem;font-size:16px;font-weight:600;border-radius:10px;text-decoration:none;transition:transform 0.2s linear,box-shadow 0.2s linear;cursor:pointer;text-align:center;">{{ $text }}</a>
+{{- end -}}

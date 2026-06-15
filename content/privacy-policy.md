@@ -1,37 +1,56 @@
 ---
-title: "隐私政策"
+title: "Privacy Policy"
 date: 2026-06-09T10:00:00+08:00
 draft: false
 ---
 
-## 隐私政策
+## Privacy Policy
 
-ProductPick 重视您的隐私保护。
+SavingSec takes the protection of your privacy seriously.
 
-### 我们收集的信息
+### Information We Collect
 
-- **浏览数据**: 通过 Cookies 收集匿名浏览数据用于改善用户体验
-- **邮箱地址**: 仅在您主动订阅时收集
+- **Browser Data**: Anonymous browsing data is collected via cookies to improve user experience
+- **Email Address**: Collected only when you actively subscribe to the newsletter
 
-### Cookie 使用
+### GDPR Compliance (EU Users)
 
-我们使用 Cookie 来：
-- 记住您的搜索偏好
-- 分析网站流量
-- 优化内容展示
+For users in the European Economic Area (EEA), we process your data in accordance with the General Data Protection Regulation (GDPR). You have the right to:
 
-### 第三方服务
+- **Access**: You can request a copy of the personal data we hold
+- **Rectification**: You can request correction of inaccurate data
+- **Erasure**: You can request deletion of your personal data ("right to be forgotten")
+- **Restriction**: You can request restriction of processing of your data
+- **Portability**: You can receive your data in a structured, machine-readable format
+- **Objection**: You can object to the processing of your data
 
-我们可能使用以下第三方服务：
-- Google Analytics：网站流量分析
-- Cloudflare：CDN 和安全服务
+### Cookie Usage
 
-### 您的权利
+We use cookies to:
+- Remember your search preferences
+- Analyze website traffic
+- Optimize content presentation
 
-- 随时取消订阅
-- 要求删除您的个人数据
-- 拒绝 Cookie 追踪
+### Third-Party Services
 
-### 联系我们
+We may use the following third-party services:
+- Google Analytics: Website traffic analysis
+- Cloudflare: CDN and security services
 
-如有隐私相关问题，请联系：contact@chanpintuijian.com
+### Your Rights
+
+- Unsubscribe from the newsletter at any time
+- Request deletion of your personal data
+- Opt out of cookie tracking
+
+### Data Security
+
+We implement industry-standard security measures to protect your data from unauthorized access, alteration, disclosure, or destruction.
+
+### Data Retention
+
+We retain your personal data only as long as necessary for the purposes for which it was collected or as required by law.
+
+### Contact Us
+
+For privacy-related questions, please contact us at: Assnent@gmail.com

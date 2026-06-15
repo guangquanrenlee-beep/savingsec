@@ -1,27 +1,112 @@
-<header class="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-gray-200">
-  <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex items-center justify-between h-16">
+<header style="position:sticky;top:0;z-index:50;background:#192945;border-bottom:1px solid rgba(255,255,255,0.08);">
+  <div style="max-width:1280px;margin:0 auto;padding:0 24px;">
+    <div style="display:flex;align-items:center;justify-content:space-between;height:70px;">
       <!-- Logo -->
-      <a href="/" class="flex items-center space-x-2">
-        <span class="text-2xl">🎯</span>
-        <span class="text-xl font-bold text-gray-900">{{ .Site.Params.siteName }}</span>
+      <a href="/" style="display:flex;align-items:center;gap:14px;text-decoration:none;flex-shrink:0;">
+        <svg style="width:32px;height:32px;color:#e67e22;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+          <path d="M2 17l10 5 10-5"/>
+          <path d="M2 12l10 5 10-5"/>
+        </svg>
+        <span style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;letter-spacing:-0.01em;color:#fff;">SavingSec</span>
       </a>
+
       <!-- Desktop Nav -->
-      <div class="hidden md:flex items-center space-x-6">
-        <a href="/product/" class="text-sm font-medium text-gray-700 hover:text-primary-600">商品</a>
-        <a href="/coupon/" class="text-sm font-medium text-gray-700 hover:text-primary-600">优惠券</a>
-        <a href="/deal/" class="text-sm font-medium text-gray-700 hover:text-primary-600">促销</a>
-        <a href="/review/" class="text-sm font-medium text-gray-700 hover:text-primary-600">评测</a>
-        <a href="/blog/" class="text-sm font-medium text-gray-700 hover:text-primary-600">文章</a>
-      </div>
-      <!-- Search Trigger -->
-      <div class="flex items-center space-x-3">
-        <button id="search-trigger" class="flex items-center px-3 py-2 text-sm text-gray-500 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors" aria-label="搜索">
-          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-          搜索...
-          <kbd class="ml-2 px-1.5 py-0.5 text-xs bg-white rounded border">⌘K</kbd>
+      <nav style="display:none;gap:8px;" role="navigation" id="desktop-nav">
+        <a href="/" style="padding:10px 24px;font-size:16px;font-weight:500;color:rgba(255,255,255,0.8);border-radius:10px;text-decoration:none;transition:all 0.2s linear;" onmouseover="this.style.color='#fff';this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.color='rgba(255,255,255,0.8)';this.style.background='transparent'">{{ i18n "nav_home" }}</a>
+        <a href="/coupon/" style="padding:10px 24px;font-size:16px;font-weight:500;color:rgba(255,255,255,0.8);border-radius:10px;text-decoration:none;transition:all 0.2s linear;" onmouseover="this.style.color='#fff';this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.color='rgba(255,255,255,0.8)';this.style.background='transparent'">{{ i18n "nav_coupons" }}</a>
+        <a href="/review/" style="padding:10px 24px;font-size:16px;font-weight:500;color:rgba(255,255,255,0.8);border-radius:10px;text-decoration:none;transition:all 0.2s linear;" onmouseover="this.style.color='#fff';this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.color='rgba(255,255,255,0.8)';this.style.background='transparent'">{{ i18n "nav_reviews" }}</a>
+        <a href="/product/" style="padding:10px 24px;font-size:16px;font-weight:500;color:rgba(255,255,255,0.8);border-radius:10px;text-decoration:none;transition:all 0.2s linear;" onmouseover="this.style.color='#fff';this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.color='rgba(255,255,255,0.8)';this.style.background='transparent'">{{ i18n "nav_toplist" }}</a>
+        <a href="/blog/" style="padding:10px 24px;font-size:16px;font-weight:500;color:rgba(255,255,255,0.8);border-radius:10px;text-decoration:none;transition:all 0.2s linear;" onmouseover="this.style.color='#fff';this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.color='rgba(255,255,255,0.8)';this.style.background='transparent'">{{ i18n "nav_tips" }}</a>
+      </nav>
+
+      <!-- Right side -->
+      <div style="display:flex;align-items:center;gap:12px;">
+        <!-- Language Switcher -->
+        <div style="position:relative;" id="lang-switcher">
+          <button id="lang-btn" style="display:flex;align-items:center;padding:8px 14px;font-size:15px;font-weight:500;color:rgba(255,255,255,0.8);background:none;border:none;cursor:pointer;border-radius:10px;transition:color 0.2s;" aria-label="{{ i18n "language_switcher" | default "Language" }}" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.8)'">
+            <span id="current-lang">{{ .Site.Language.LanguageName }}</span>
+            <svg style="width:14px;height:14px;margin-left:6px;color:rgba(255,255,255,0.5);" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <!-- Dropdown -->
+          <div id="lang-dropdown" style="display:none;position:absolute;right:0;top:100%;margin-top:4px;width:144px;background:#fff;border-radius:10px;box-shadow:0 10px 30px rgba(0,0,0,0.12);border:1px solid #e8ebf0;padding:4px 0;z-index:50;">
+            {{ $currentLang := .Site.Language.Lang }}
+            {{ range .Site.Sites }}
+            <a href="/{{ .Language.Lang }}/" style="display:block;padding:8px 14px;font-size:14px;color:{{ if eq .Language.Lang $currentLang }}#192945;font-weight:500;{{ else }}#444;{{ end }}background:{{ if eq .Language.Lang $currentLang }}rgba(25,41,69,0.05);{{ else }}transparent;{{ end }}text-decoration:none;transition:background 0.2s;" data-lang="{{ .Language.Lang }}" onmouseover="this.style.background='{{ if eq .Language.Lang $currentLang }}rgba(25,41,69,0.05){{ else }}#f7f8fa{{ end }}'" onmouseout="this.style.background='{{ if eq .Language.Lang $currentLang }}rgba(25,41,69,0.05){{ else }}transparent{{ end }}'">
+              {{ .Language.LanguageName }}
+            </a>
+            {{ end }}
+          </div>
+        </div>
+
+        <!-- Mobile hamburger -->
+        <button id="mobile-menu-btn" style="display:block;padding:8px;color:rgba(255,255,255,0.8);background:none;border:none;cursor:pointer;border-radius:10px;transition:all 0.2s;" aria-label="Menu" onmouseover="this.style.color='#fff';this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.color='rgba(255,255,255,0.8)';this.style.background='transparent'">
+          <svg id="menu-icon-open" style="width:22px;height:22px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+          <svg id="menu-icon-close" style="width:22px;height:22px;display:none;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
         </button>
       </div>
     </div>
-  </nav>
+
+    <!-- Mobile Menu -->
+    <nav id="mobile-menu" style="border-top:1px solid rgba(255,255,255,0.1);overflow:hidden;transition:max-height 0.3s ease;max-height:0;display:none;" role="navigation">
+      <div style="padding:8px 0;">
+        <a href="/" style="display:block;padding:14px;font-size:16px;font-weight:500;color:rgba(255,255,255,0.8);text-decoration:none;border-radius:10px;transition:all 0.2s;" onmouseover="this.style.color='#fff';this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.color='rgba(255,255,255,0.8)';this.style.background='transparent'">{{ i18n "nav_home" }}</a>
+        <a href="/coupon/" style="display:block;padding:14px;font-size:16px;font-weight:500;color:rgba(255,255,255,0.8);text-decoration:none;border-radius:10px;transition:all 0.2s;" onmouseover="this.style.color='#fff';this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.color='rgba(255,255,255,0.8)';this.style.background='transparent'">{{ i18n "nav_coupons" }}</a>
+        <a href="/review/" style="display:block;padding:14px;font-size:16px;font-weight:500;color:rgba(255,255,255,0.8);text-decoration:none;border-radius:10px;transition:all 0.2s;" onmouseover="this.style.color='#fff';this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.color='rgba(255,255,255,0.8)';this.style.background='transparent'">{{ i18n "nav_reviews" }}</a>
+        <a href="/product/" style="display:block;padding:14px;font-size:16px;font-weight:500;color:rgba(255,255,255,0.8);text-decoration:none;border-radius:10px;transition:all 0.2s;" onmouseover="this.style.color='#fff';this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.color='rgba(255,255,255,0.8)';this.style.background='transparent'">{{ i18n "nav_toplist" }}</a>
+        <a href="/blog/" style="display:block;padding:14px;font-size:16px;font-weight:500;color:rgba(255,255,255,0.8);text-decoration:none;border-radius:10px;transition:all 0.2s;" onmouseover="this.style.color='#fff';this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.color='rgba(255,255,255,0.8)';this.style.background='transparent'">{{ i18n "nav_tips" }}</a>
+      </div>
+    </nav>
+  </div>
 </header>
+
+<!-- Language Switcher & Mobile Menu JS -->
+<script>
+(function() {
+  var desktopNav = document.getElementById('desktop-nav');
+  var mobileMenu = document.getElementById('mobile-menu');
+  var mobileMenuBtn = document.getElementById('mobile-menu-btn');
+  var iconOpen = document.getElementById('menu-icon-open');
+  var iconClose = document.getElementById('menu-icon-close');
+
+  function checkWidth() {
+    var isDesktop = window.innerWidth >= 1024;
+    if (desktopNav) desktopNav.style.display = isDesktop ? 'flex' : 'none';
+    if (mobileMenu) mobileMenu.style.display = isDesktop ? 'none' : '';
+    if (mobileMenuBtn) mobileMenuBtn.style.display = isDesktop ? 'none' : 'block';
+  }
+  checkWidth();
+  window.addEventListener('resize', checkWidth);
+
+  // Language dropdown
+  var langBtn = document.getElementById('lang-btn');
+  var langDropdown = document.getElementById('lang-dropdown');
+  if (langBtn && langDropdown) {
+    langBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      langDropdown.style.display = langDropdown.style.display === 'none' ? 'block' : 'none';
+    });
+    document.addEventListener('click', function(e) {
+      if (!document.getElementById('lang-switcher').contains(e.target)) {
+        langDropdown.style.display = 'none';
+      }
+    });
+  }
+
+  // Mobile hamburger
+  if (mobileMenuBtn && mobileMenu && iconOpen && iconClose) {
+    mobileMenuBtn.addEventListener('click', function() {
+      if (mobileMenu.style.maxHeight === '500px') {
+        mobileMenu.style.maxHeight = '0';
+        iconOpen.style.display = 'block';
+        iconClose.style.display = 'none';
+      } else {
+        mobileMenu.style.maxHeight = '500px';
+        iconOpen.style.display = 'none';
+        iconClose.style.display = 'block';
+      }
+    });
+  }
+})();
+</script>

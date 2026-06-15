@@ -1,47 +1,28 @@
-<footer class="bg-gray-900 text-gray-400">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-      <!-- Brand -->
-      <div class="col-span-2 md:col-span-1">
-        <div class="flex items-center space-x-2 mb-4">
-          <span class="text-2xl">🎯</span>
-          <span class="text-xl font-bold text-white">{{ .Site.Params.siteName }}</span>
-        </div>
-        <p class="text-sm">{{ .Site.Params.description }}</p>
-      </div>
-      <!-- Quick Links -->
-      <div>
-        <h3 class="text-sm font-semibold text-white uppercase mb-3">导航</h3>
-        <ul class="space-y-2">
-          <li><a href="/product/" class="text-sm hover:text-white transition-colors">商品推荐</a></li>
-          <li><a href="/coupon/" class="text-sm hover:text-white transition-colors">优惠券</a></li>
-          <li><a href="/deal/" class="text-sm hover:text-white transition-colors">促销活动</a></li>
-          <li><a href="/review/" class="text-sm hover:text-white transition-colors">产品评测</a></li>
-        </ul>
-      </div>
-      <!-- Categories -->
-      <div>
-        <h3 class="text-sm font-semibold text-white uppercase mb-3">分类</h3>
-        <ul class="space-y-2">
-          {{ range $name, $taxonomy := .Site.Taxonomies.categories }}
-          <li><a href="/category/{{ $name }}/" class="text-sm hover:text-white transition-colors">{{ $name | title }}</a></li>
-          {{ end }}
-        </ul>
-      </div>
-      <!-- Legal -->
-      <div>
-        <h3 class="text-sm font-semibold text-white uppercase mb-3">法律声明</h3>
-        <ul class="space-y-2">
-          <li><a href="/about/" class="text-sm hover:text-white transition-colors">关于我们</a></li>
-          <li><a href="/affiliate-disclosure/" class="text-sm hover:text-white transition-colors">联盟营销声明</a></li>
-          <li><a href="/privacy-policy/" class="text-sm hover:text-white transition-colors">隐私政策</a></li>
-          <li><a href="/contact/" class="text-sm hover:text-white transition-colors">联系我们</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="border-t border-gray-800 mt-8 pt-8 text-center text-sm">
-      <p>&copy; {{ now.Format "2006" }} {{ .Site.Params.siteName }}. All rights reserved.</p>
-      <p class="mt-2 text-xs text-gray-500">{{ .Site.Params.affiliate.disclaimer }}</p>
-    </div>
+<footer style="background:#192945;padding:24px 0;">
+  <div style="max-width:1280px;margin:0 auto;padding:0 24px;">
+    <!-- Copyright -->
+    <p style="text-align:center;font-size:13px;color:rgba(255,255,255,0.5);margin-bottom:16px;">
+      &copy; {{ now.Format "2006" }} SavingSec. {{ i18n "footer_rights" }}. {{ i18n "affiliate_disclaimer" }}
+    </p>
+    <!-- Compliance Links Row -->
+    <nav style="display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px 24px;">
+      <a href="{{ with .Site.GetPage "about" }}{{ .RelPermalink }}{{ else }}/{{ end }}" style="font-size:13px;color:rgba(255,255,255,0.6);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">{{ i18n "footer_about_us" }}</a>
+      <span style="color:rgba(255,255,255,0.2);">|</span>
+      <a href="{{ with .Site.GetPage "affiliate-disclosure" }}{{ .RelPermalink }}{{ else }}/{{ end }}" style="font-size:13px;color:rgba(255,255,255,0.6);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">{{ i18n "footer_affiliate" }}</a>
+      <span style="color:rgba(255,255,255,0.2);">|</span>
+      <a href="{{ with .Site.GetPage "privacy-policy" }}{{ .RelPermalink }}{{ else }}/{{ end }}" style="font-size:13px;color:rgba(255,255,255,0.6);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">{{ i18n "footer_privacy" }}</a>
+      <span style="color:rgba(255,255,255,0.2);">|</span>
+      <a href="{{ with .Site.GetPage "cookie-policy" }}{{ .RelPermalink }}{{ else }}/{{ end }}" style="font-size:13px;color:rgba(255,255,255,0.6);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">{{ i18n "footer_cookie" }}</a>
+      <span style="color:rgba(255,255,255,0.2);">|</span>
+      <a href="{{ with .Site.GetPage "disclaimer" }}{{ .RelPermalink }}{{ else }}/{{ end }}" style="font-size:13px;color:rgba(255,255,255,0.6);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">{{ i18n "footer_disclaimer" }}</a>
+      <span style="color:rgba(255,255,255,0.2);">|</span>
+      <a href="{{ with .Site.GetPage "refund-policy" }}{{ .RelPermalink }}{{ else }}/{{ end }}" style="font-size:13px;color:rgba(255,255,255,0.6);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">{{ i18n "footer_refund" }}</a>
+      <span style="color:rgba(255,255,255,0.2);">|</span>
+      <a href="{{ with .Site.GetPage "contact" }}{{ .RelPermalink }}{{ else }}/{{ end }}" style="font-size:13px;color:rgba(255,255,255,0.6);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">{{ i18n "footer_contact" }}</a>
+    </nav>
+    <!-- Contact Email -->
+    <p style="text-align:center;font-size:12px;color:rgba(255,255,255,0.4);margin-top:16px;">
+      {{ i18n "contact_email_label" }}: <a href="mailto:Assnent@gmail.com" style="color:rgba(255,255,255,0.5);text-decoration:none;">Assnent@gmail.com</a>
+    </p>
   </div>
 </footer>

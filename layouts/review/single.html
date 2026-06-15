@@ -1,32 +1,135 @@
 {{ define "main" }}
-<article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
-  <nav class="flex items-center text-sm text-gray-500 mb-6">
-    <a href="/" class="hover:text-primary-600">首页</a><span class="mx-2">/</span>
-    <a href="/review/" class="hover:text-primary-600">评测</a><span class="mx-2">/</span>
-    <span class="text-gray-900">{{ .Title }}</span>
+<article class="max-w-5xl mx-auto px-6 py-10">
+  <!-- Breadcrumb -->
+  <nav class="flex items-center text-[13px] text-neutral-muted mb-8" aria-label="Breadcrumb">
+    <a href="/" class="hover:text-brand transition-colors">{{ i18n "home" }}</a>
+    <span class="mx-2">/</span>
+    <a href="/review/" class="hover:text-brand transition-colors">{{ i18n "nav_reviews" }}</a>
+    <span class="mx-2">/</span>
+    <span class="text-brand">{{ .Title }}</span>
   </nav>
+
+  <!-- Review Header -->
   <header class="mb-8">
-    <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">{{ .Title }}</h1>
-    {{ with .Params.description }}<p class="text-lg text-gray-600 mb-4">{{ . }}</p>{{ end }}
-    <div class="flex items-center gap-4 text-sm text-gray-500">
+    <h1 class="text-2xl font-semibold text-brand mb-3">{{ .Title }}</h1>
+    {{ with .Params.description }}<p class="text-base text-neutral-text leading-relaxed mb-4">{{ . }}</p>{{ end }}
+    <div class="flex flex-wrap items-center gap-4 text-sm text-neutral-muted">
       <span>{{ .Params.author }}</span>
-      <span>最后更新: {{ .Params.last_updated | time.Format "2006年1月2日" }}</span>
+      <span>{{ i18n "last_updated" }}: <time datetime="{{ .Params.last_updated }}">{{ .Params.last_updated | time.Format "2006-01-02" }}</time></span>
       {{ with .Params.rating }}
-        <div class="flex items-center text-yellow-400">{{ range seq 5 }}{{ if le . $.rating }}★{{ else }}☆{{ end }}{{ end }} <span class="ml-1 text-gray-500">{{ . }}/5</span></div>
+        {{ $rating := . }}
+        <div class="flex items-center star-rating">
+          <meta content="5">
+          <meta content="1">
+          <span>{{ $rating }}</span>
+          <span class="ml-1">/5</span>
+        </div>
       {{ end }}
     </div>
   </header>
-  <div class="bg-white rounded-xl shadow-card p-6 sm:p-8 prose prose-lg max-w-none">
-    {{ .Content }}
-  </div>
-  {{ with .Params.related_product }}
-    <div class="mt-8">
-      <h2 class="text-xl font-bold text-gray-900 mb-4">相关产品</h2>
-      {{ $product := where (where $.Site.RegularPages "Section" "product") "Params.slug" . }}
-      {{ with index $product 0 }}
-        {{ partial "product-card" (dict "product" .) }}
+
+  <!-- AI Summary Box: Key Info at a glance -->
+  <section class="bg-white rounded-lg shadow-card p-6 mb-8" id="ai-summary">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      {{ with .Params.rating }}
+      <div class="flex items-center gap-3">
+        <span class="text-sm text-neutral-muted flex-shrink-0">{{ i18n "rating" }}:</span>
+        <span class="star-rating text-lg">{{ range seq 5 }}{{ if le . $.Params.rating }}★{{ else }}<span class="star-empty">☆</span>{{ end }}{{ end }}</span>
+        <span class="text-brand font-semibold">{{ . }}/5</span>
+      </div>
+      {{ end }}
+      {{ if .Params.price }}
+      <div class="flex items-center gap-3">
+        <span class="text-sm text-neutral-muted flex-shrink-0">{{ i18n "current_price" }}:</span>
+        <span class="text-lg font-bold text-accent">{{ .Params.price }}</span>
+        {{ with .Params.original_price }}<span class="text-sm text-neutral-muted line-through">{{ . }}</span>{{ end }}
+      </div>
       {{ end }}
     </div>
+  </section>
+
+  <!-- Main Content -->
+  <div class="mb-8 prose">
+    {{ .Content }}
+  </div>
+
+  <!-- Pros & Cons (independent DOM for AI extraction) -->
+  {{ if or .Params.pros .Params.cons }}
+  <section class="grid sm:grid-cols-2 gap-6 mb-8" id="pros-cons">
+    {{ with .Params.pros }}
+    <div class="bg-white rounded-lg shadow-card p-6" id="review-pros">
+      <h2 class="text-base font-semibold text-brand mb-4">✓ {{ i18n "pros" }}</h2>
+      <ul class="space-y-2">
+        {{ range . }}<li class="flex items-start gap-2 text-sm text-neutral-text"><span class="text-accent mt-0.5 flex-shrink-0">✓</span><span>{{ . }}</span></li>{{ end }}
+      </ul>
+    </div>
+    {{ end }}
+    {{ with .Params.cons }}
+    <div class="bg-white rounded-lg shadow-card p-6" id="review-cons">
+      <h2 class="text-base font-semibold mb-4" style="color:#c0392b;"> {{ i18n "cons" }}</h2>
+      <ul class="space-y-2">
+        {{ range . }}<li class="flex items-start gap-2 text-sm text-neutral-text"><span style="color:#c0392b;" class="mt-0.5 flex-shrink-0">✗</span><span>{{ . }}</span></li>{{ end }}
+      </ul>
+    </div>
+    {{ end }}
+  </section>
+  {{ end }}
+
+  <!-- Recommendation Advice (AI extraction target) -->
+  {{ if or .Params.recommend_for .Params.not_recommend_for }}
+  <section class="mb-8" id="recommendation">
+    <div class="bg-white rounded-lg shadow-card p-6 sm:p-8">
+      <h2 class="text-xl font-semibold text-brand mb-6">{{ i18n "recommendation_advice" }}</h2>
+      <div class="grid sm:grid-cols-2 gap-6">
+        {{ with .Params.recommend_for }}
+        <div id="recommend-for">
+          <h3 class="text-base font-semibold text-brand mb-3">✓ {{ i18n "suitable_for" }}</h3>
+          <p class="text-sm text-neutral-text leading-relaxed">{{ . }}</p>
+        </div>
+        {{ end }}
+        {{ with .Params.not_recommend_for }}
+        <div id="not-recommend-for">
+          <h3 class="text-base font-semibold mb-3" style="color:#c0392b;">✗ {{ i18n "not_suitable_for" }}</h3>
+          <p class="text-sm text-neutral-text leading-relaxed">{{ . }}</p>
+        </div>
+        {{ end }}
+      </div>
+    </div>
+  </section>
+  {{ end }}
+
+  <!-- Final Verdict (AI extraction target) -->
+  {{ with .Params.final_verdict }}
+  <section class="bg-brand rounded-lg p-6 sm:p-8 mb-8 text-white" id="final-verdict">
+    <h2 class="text-xl font-semibold mb-3">{{ i18n "final_verdict" }}</h2>
+    <p class="text-white/80 leading-relaxed">{{ . }}</p>
+  </section>
+  {{ end }}
+
+  <!-- Shopping CTA -->
+  {{ if .Params.affiliate_link }}
+  <div class="flex flex-col sm:flex-row gap-4 mb-8">
+    <a href="{{ .Params.affiliate_link }}" class="flex-1 text-center px-8 py-4 bg-accent text-white font-semibold rounded-lg text-[16px] hover:bg-accent-light transition-all duration-200" target="_blank" rel="nofollow sponsored">
+      {{ i18n "view_deal" }} →
+    </a>
+    {{ if .Params.original_price }}
+    <div class="flex items-center justify-center px-6 text-sm text-neutral-muted">
+      {{ i18n "original_price" }}: <span class="ml-2 line-through">{{ .Params.original_price }}</span>
+    </div>
+    {{ end }}
+  </div>
+  <p class="text-[12px] text-neutral-muted text-center mb-8">{{ i18n "affiliate_disclaimer" }}</p>
+  {{ end }}
+
+  <!-- Related Product -->
+  {{ with .Params.related_product }}
+  <section class="mb-8">
+    <h2 class="text-xl font-semibold text-brand mb-4">{{ i18n "related_product" }}</h2>
+    {{ $product := where (where $.Site.RegularPages "Section" "product") "Params.slug" . }}
+    {{ with index $product 0 }}
+      {{ partial "product-card" (dict "product" .) }}
+    {{ end }}
+  </section>
   {{ end }}
 </article>
 {{ end }}

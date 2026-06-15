@@ -4,6 +4,6 @@
       <a href="{{ .RelPermalink }}" class="hover:text-primary-600">{{ .Title }}</a>
     </h3>
     {{ with .Params.description }}<p class="text-sm text-gray-600 line-clamp-2 mb-3">{{ . }}</p>{{ end }}
-    <a href="{{ .RelPermalink }}" class="text-sm font-medium text-primary-600 hover:text-primary-700">查看详情 →</a>
+    <a href="{{ .RelPermalink }}" class="text-sm font-medium text-primary-600 hover:text-primary-700">{{ i18n "view_details" }}</a>
   </div>
 </article>

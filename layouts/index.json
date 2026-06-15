@@ -1,0 +1,23 @@
+{{- $allPages := slice -}}
+{{- range hugo.Sites -}}
+  {{- range .AllPages -}}
+    {{- if and (eq .Kind "page") (not .Params.noindex) -}}
+      {{- $allPages = $allPages | append . -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+[{{- range $i, $page := $allPages -}}
+{{- if $i }},{{ end }}
+{
+  "title": {{ $page.Title | jsonify }},
+  "url": {{ $page.RelPermalink | jsonify }},
+  "section": {{ $page.Section | jsonify }},
+  "lang": {{ $page.Lang | jsonify }},
+  "description": {{ $page.Params.description | default $page.Summary | jsonify }},
+  "brand": {{ $page.Params.brand | jsonify }},
+  "category": {{ $page.Params.category | jsonify }},
+  "price": {{ $page.Params.price | jsonify }},
+  "discount": {{ $page.Params.discount | jsonify }},
+  "content": {{ replaceRE "<[^>]*>" "" (lower $page.Content) | replaceRE "\\s+" " " | truncate 8000 | jsonify }}
+}{{- end -}}
+]

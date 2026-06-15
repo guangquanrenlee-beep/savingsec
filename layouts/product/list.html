@@ -1,12 +1,12 @@
 {{ define "main" }}
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
-  <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-2">商品推荐</h1>
-  <p class="text-lg text-gray-600 mb-8">发现精选好物，专业评测与优惠聚合</p>
+<div class="max-w-content mx-auto px-6 py-12">
+  <h1 class="text-2xl font-semibold text-brand mb-2">{{ i18n "nav_products" }}</h1>
+  <p class="text-sm text-neutral-muted mb-8">{{ i18n "latest_products_subtitle" }}</p>
   
-  <!-- Filters -->
+  <!-- Category Filters -->
   <div class="flex flex-wrap gap-2 mb-8">
     {{ range $name, $taxonomy := .Site.Taxonomies.categories }}
-      <a href="/category/{{ $name }}/" class="px-3 py-1.5 text-sm bg-white border border-gray-200 rounded-full hover:border-primary-300 hover:text-primary-600 transition-colors">{{ $name | title }}</a>
+      <a href="/category/{{ $name }}/" class="px-3 py-1.5 text-[13px] bg-white border border-neutral-border rounded-lg hover:border-brand hover:text-brand transition-colors">{{ i18n (printf "cat_%s" $name) | default ($name | title) }}</a>
     {{ end }}
   </div>
 

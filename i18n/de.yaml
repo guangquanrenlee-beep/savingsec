@@ -1,0 +1,237 @@
+- id: nav_home
+  translation: "Startseite"
+- id: nav_coupons
+  translation: "Gutscheine"
+- id: nav_reviews
+  translation: "Bewertungen"
+- id: nav_toplist
+  translation: "Top-Auswahl"
+- id: nav_tips
+  translation: "Spartipps"
+- id: nav_deals
+  translation: "Angebote"
+- id: nav_products
+  translation: "Produkte"
+- id: nav_articles
+  translation: "Artikel"
+- id: nav_brands
+  translation: "Marken"
+- id: nav_categories
+  translation: "Kategorien"
+- id: language_switcher
+  translation: "Sprache"
+- id: date_format
+  translation: "2. Jan 2006"
+- id: search_placeholder
+  translation: "Suchen..."
+- id: search_all
+  translation: "Alle Produkte, Gutscheine und Artikel suchen..."
+- id: hero_title
+  translation: "Entdecken Sie Qualitätsprodukte · Sparen Sie mit Vertrauen"
+- id: hero_subtitle
+  translation: "Expertenbewertungen + Echte Angebote + Kuratierte Auswahl"
+- id: read_more
+  translation: "Weiterlesen"
+- id: back_to_home
+  translation: "Zur Startseite"
+- id: latest_products
+  translation: "Neueste Produkte"
+- id: latest_products_subtitle
+  translation: "Redaktionsempfehlungen"
+- id: latest_coupons
+  translation: "Neueste Gutscheine"
+- id: latest_coupons_subtitle
+  translation: "Verifizierte Rabattcodes"
+- id: latest_deals
+  translation: "Neueste Angebote"
+- id: latest_deals_subtitle
+  translation: "Verpassen Sie es nicht"
+- id: latest_reviews
+  translation: "Neueste Bewertungen"
+- id: latest_articles
+  translation: "Neueste Artikel"
+- id: view_all
+  translation: "Alle anzeigen"
+- id: related_products
+  translation: "Empfehlungen"
+- id: copy_code
+  translation: "Code kopieren"
+- id: copied
+  translation: "Kopiert!"
+- id: expired
+  translation: "Abgelaufen"
+- id: expires
+  translation: "Gültig bis"
+- id: original_price
+  translation: "Originalpreis"
+- id: deal_price
+  translation: "Angebotspreis"
+- id: save
+  translation: "Sparen"
+- id: rating
+  translation: "Bewertung"
+- id: pros
+  translation: "Vorteile"
+- id: cons
+  translation: "Nachteile"
+- id: verdict
+  translation: "Fazit"
+- id: affiliate_disclaimer
+  translation: "Über Links können wir Provisionen verdienen, was Ihren Kaufpreis nicht beeinflusst."
+- id: no_products
+  translation: "Keine Produkte"
+- id: no_coupons
+  translation: "Keine Gutscheine"
+- id: no_deals
+  translation: "Keine Angebote"
+- id: page_not_found
+  translation: "Seite nicht gefunden"
+- id: page_not_found_desc
+  translation: "Die gesuchte Seite existiert leider nicht."
+- id: items
+  translation: "Artikel"
+- id: browse_categories
+  translation: "Kategorien durchsuchen"
+- id: subscribe_title
+  translation: "Angebote abonnieren"
+- id: subscribe_desc
+  translation: "Wöchentlich kuratierte Produktauswahl und exklusive Angebote"
+- id: subscribe_placeholder
+  translation: "E-Mail eingeben"
+- id: subscribe
+  translation: "Abonnieren"
+- id: view_deal
+  translation: "Angebot ansehen →"
+- id: grab_now
+  translation: "Jetzt kaufen →"
+- id: verified
+  translation: "Verifiziert"
+- id: time_limited
+  translation: "Begrenzte Zeit"
+- id: last_updated
+  translation: "Letzte Aktualisierung"
+- id: product_intro
+  translation: "Produktübersicht"
+- id: pros_cons
+  translation: "Vor- und Nachteile"
+- id: related_coupons
+  translation: "Zugehörige Gutscheine"
+- id: related_deals
+  translation: "Zugehörige Angebote"
+- id: faq
+  translation: "FAQ"
+- id: related_products_section
+  translation: "Ähnliche Produkte"
+- id: product_summary
+  translation: "Produktzusammenfassung"
+- id: table_of_contents
+  translation: "Inhaltsverzeichnis"
+- id: related_product
+  translation: "Zugehöriges Produkt"
+- id: use_coupon
+  translation: "Gutschein nutzen →"
+- id: discount_label
+  translation: "Rabatt"
+- id: home
+  translation: "Startseite"
+- id: breadcrumb_products
+  translation: "Produkte"
+- id: footer_about
+  translation: "Über uns"
+- id: footer_about_us
+  translation: "Über uns"
+- id: footer_contact
+  translation: "Kontakt"
+- id: footer_privacy
+  translation: "Datenschutz"
+- id: footer_affiliate
+  translation: "Affiliate-Offenlegung"
+- id: footer_rights
+  translation: "Alle Rechte vorbehalten"
+- id: footer_tagline
+  translation: "Professionelle Produktbewertungen & Angebote"
+- id: footer_legal
+  translation: "Rechtliches"
+- id: footer_cookie
+  translation: "Cookie-Richtlinie"
+- id: footer_disclaimer
+  translation: "Haftungsausschluss"
+- id: footer_refund
+  translation: "Rückerstattung & Support"
+- id: contact_email_label
+  translation: "Kontakt"
+# Review Page AI Optimization
+- id: rating
+  translation: "Bewertung"
+- id: current_price
+  translation: "Aktueller Preis"
+- id: recommendation_level
+  translation: "Empfehlungsniveau"
+- id: recommendation_advice
+  translation: "Kaufberatung"
+- id: suitable_for
+  translation: "Geeignet für"
+- id: not_suitable_for
+  translation: "Nicht geeignet für"
+- id: final_verdict
+  translation: "Endurteil"
+- id: original_price
+  translation: "Originalpreis"
+- id: cat_electronics
+  translation: "Elektronik"
+- id: cat_home
+  translation: "Haus & Wohnen"
+- id: cat_beauty
+  translation: "Schönheit & Pflege"
+- id: cat_fashion
+  translation: "Mode"
+- id: cat_food
+  translation: "Essen & Trinken"
+- id: cat_sports
+  translation: "Sport & Outdoor"
+- id: cat_books
+  translation: "Bücher & Schreibwaren"
+- id: cat_toys
+  translation: "Baby & Spielzeug"
+- id: all_brands
+  translation: "Alle Marken"
+- id: search_results
+  translation: "Suchergebnisse"
+- id: all
+  translation: "Alle"
+- id: no_results
+  translation: "Keine Ergebnisse gefunden"
+- id: no_results_desc
+  translation: "Keine passenden Ergebnisse. Versuchen Sie andere Suchbegriffe."
+- id: found_results
+  translation: "Gefunden"
+- id: results
+  translation: "Ergebnisse"
+- id: search_placeholder_long
+  translation: "Suchbegriffe eingeben"
+- id: site_description
+  translation: "Professionelle Plattform für Produktbewertungen, Gutscheine und Angebote"
+- id: reviews_title
+  translation: "Produktbewertungen"
+- id: reviews_subtitle
+  translation: "Ausführliche Bewertungen, echte Erfahrungen"
+- id: articles_title
+  translation: "Artikel"
+- id: articles_subtitle
+  translation: "Kaufberatungen & praktische Tipps"
+- id: deals_title
+  translation: "Angebote"
+- id: deals_subtitle
+  translation: "Zeitlich begrenzte Angebote"
+- id: coupons_title
+  translation: "Gutschein-Center"
+- id: coupons_subtitle
+  translation: "Verifizierte exklusive Rabattcodes"
+- id: category_products_desc
+  translation: "Alle Produkte dieser Kategorie"
+- id: brand_products_desc
+  translation: " Produkte und Angebote"
+- id: brand_coupons
+  translation: "Gutscheine"
+- id: view_details
+  translation: "Details ansehen →"

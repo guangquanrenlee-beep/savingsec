@@ -1,3 +1,423 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* ============================================================
+   BASE STYLES — Global site foundation
+   ============================================================ */
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: Inter, system-ui, -apple-system, sans-serif;
+    color: #1A1A1A;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.7;
+    background: #FFFFFF;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    color: #1A1A1A;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+  a {
+    transition: color 0.2s linear, background-color 0.2s linear;
+  }
+  ::selection {
+    background: rgba(25,41,69,0.1);
+  }
+}
+
+/* ============================================================
+   UI COMPONENTS — Buttons, Cards, Tags, Nav
+   ============================================================ */
+
+@layer components {
+  .btn-primary {
+    display: inline-block;
+    padding: 0.625rem 1.5rem;
+    background: #192945;
+    color: #fff;
+    font-weight: 500;
+    border-radius: 10px;
+    text-align: center;
+    transition: transform 0.2s linear, box-shadow 0.2s linear;
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(25,41,69,0.3);
+  }
+  .btn-secondary {
+    display: inline-block;
+    padding: 0.625rem 1.5rem;
+    border: 1.5px solid #192945;
+    color: #192945;
+    font-weight: 500;
+    border-radius: 10px;
+    text-align: center;
+    transition: all 0.2s linear;
+  }
+  .btn-secondary:hover {
+    background: #192945;
+    color: #fff;
+  }
+  .btn-accent {
+    display: inline-block;
+    padding: 0.625rem 1.5rem;
+    background: #e67e22;
+    color: #fff;
+    font-weight: 500;
+    border-radius: 10px;
+    text-align: center;
+    transition: transform 0.2s linear, box-shadow 0.2s linear;
+  }
+  .btn-accent:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(230,126,34,0.3);
+  }
+  .card {
+    background: #fff;
+    border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  }
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
+  }
+  .tag-accent {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.625rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    border-radius: 9999px;
+    background: rgba(230,126,34,0.1);
+    color: #e67e22;
+  }
+  .tag-brand {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.625rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    border-radius: 9999px;
+    background: rgba(25,41,69,0.08);
+    color: #192945;
+  }
+  .nav-item {
+    padding: 0.5rem 1.25rem;
+    font-size: 15px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.8);
+    border-radius: 10px;
+    transition: all 0.2s linear;
+  }
+  .nav-item:hover {
+    color: #fff;
+    background: rgba(255,255,255,0.1);
+  }
+  .section-padding {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+}
+
+/* ============================================================
+   ARTICLE TYPOGRAPHY SYSTEM
+   Font: Montserrat (titles) + Roboto (body)
+   For: Review / Blog / Compliance pages
+   ============================================================ */
+
+/* --- Container --- */
+.prose {
+  font-family: 'Roboto', 'Open Sans', Arial, sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #1A1A1A;
+}
+
+/* --- Paragraph --- */
+.prose p {
+  margin: 0 0 1.2em 0;
+  text-indent: 0;
+  letter-spacing: 0em;
+  word-spacing: normal;
+}
+
+/* --- Headings — Montserrat --- */
+.prose h1 {
+  font-family: 'Montserrat', 'Open Sans', Arial, sans-serif;
+  font-weight: 700;
+  font-size: 2rem;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: #1A1A1A;
+  margin-top: 0;
+  margin-bottom: 0.8em;
+}
+
+.prose h2 {
+  font-family: 'Montserrat', 'Open Sans', Arial, sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: 1.2;
+  letter-spacing: 0em;
+  color: #1A1A1A;
+  margin-top: 2em;
+  margin-bottom: 0.8em;
+}
+
+.prose h3 {
+  font-family: 'Montserrat', 'Open Sans', Arial, sans-serif;
+  font-weight: 600;
+  font-size: 1.25rem;
+  line-height: 1.2;
+  letter-spacing: 0em;
+  color: #1A1A1A;
+  margin-top: 1.4em;
+  margin-bottom: 0.8em;
+}
+
+.prose h4 {
+  font-family: 'Montserrat', 'Open Sans', Arial, sans-serif;
+  font-weight: 600;
+  font-size: 1.125rem;
+  line-height: 1.2;
+  color: #1A1A1A;
+  margin-top: 1.2em;
+  margin-bottom: 0.6em;
+}
+
+/* --- Links --- */
+.prose a {
+  color: #0066CC;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+.prose a:hover {
+  color: #0052a3;
+  text-decoration-thickness: 2px;
+}
+
+/* --- Lists --- */
+.prose ul, .prose ol {
+  margin: 0 0 1.2em 0;
+  padding-left: 1.5em;
+}
+.prose li {
+  margin-bottom: 0.5em;
+  line-height: 1.6;
+}
+.prose li:last-child {
+  margin-bottom: 0;
+}
+
+/* --- Blockquote --- */
+.prose blockquote {
+  border-left: 3px solid #0066CC;
+  padding: 0.5em 0 0.5em 1.5em;
+  margin: 0 0 1.5em 0;
+  color: #555555;
+  font-style: normal;
+}
+
+/* --- Tables — Parameter Comparison --- */
+.prose table {
+  width: 100%;
+  margin: 2em 0;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+}
+.prose thead {
+  background: #F8F9FA;
+}
+.prose th {
+  font-family: 'Montserrat', 'Open Sans', Arial, sans-serif;
+  font-weight: 600;
+  font-size: 0.875rem;
+  text-align: left;
+  padding: 0.75rem 1rem;
+  border-bottom: 2px solid #e8ebf0;
+  color: #1A1A1A;
+}
+.prose td {
+  padding: 0.625rem 1rem;
+  border-bottom: 1px solid #eee;
+  line-height: 1.5;
+  color: #1A1A1A;
+}
+.prose tbody tr:hover {
+  background: #f7f8fa;
+}
+
+/* --- Small Text / Annotations --- */
+.prose small,
+.prose .text-sm,
+.prose .muted {
+  font-size: 0.875rem;
+  line-height: 1.7;
+  color: #555555;
+}
+
+/* --- Code --- */
+.prose code {
+  background: #F8F9FA;
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  font-size: 0.875em;
+  color: #1A1A1A;
+}
+.prose pre {
+  background: #F8F9FA;
+  padding: 1rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 0 0 1.5em 0;
+}
+.prose pre code {
+  background: none;
+  padding: 0;
+}
+
+/* --- Horizontal Rule --- */
+.prose hr {
+  border: none;
+  border-top: 1px solid #e8ebf0;
+  margin: 2em 0;
+}
+
+/* --- Images --- */
+.prose img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 1.5em 0;
+}
+
+/* --- Rating Badges / Uppercase Labels --- */
+.prose .badge,
+.prose .rating-label,
+.prose .pros-cons-label,
+.prose [class*="badge"] {
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ============================================================
+   MOBILE RESPONSIVE — 768px breakpoint (highest priority)
+   ============================================================ */
+
+@media (max-width: 768px) {
+  /* Container — tighter padding, narrower ch */
+  .prose {
+    max-width: 50ch;
+    padding: 0 1rem;
+    line-height: 1.65;
+  }
+
+  /* Titles — proportional scale down */
+  .prose h1 {
+    font-size: 1.5rem;
+    margin-top: 0;
+    margin-bottom: 0.6em;
+  }
+  .prose h2 {
+    font-size: 1.25rem;
+    margin-top: 1.5em;
+    margin-bottom: 0.6em;
+  }
+  .prose h3 {
+    font-size: 1.125rem;
+    margin-top: 1.2em;
+    margin-bottom: 0.6em;
+  }
+  .prose h4 {
+    font-size: 1rem;
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+  }
+
+  /* Paragraphs — tighter spacing */
+  .prose p {
+    margin-bottom: 1em;
+  }
+
+  /* Tables — full-bleed horizontal scroll, smaller font */
+  .prose table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    font-size: 0.8125rem;
+    margin: 1.5em -1rem;
+    padding: 0 1rem;
+    width: calc(100% + 2rem);
+  }
+  .prose th,
+  .prose td {
+    padding: 0.5rem 0.75rem;
+    white-space: normal;
+    word-break: break-word;
+  }
+
+  /* Lists — tighter indent */
+  .prose ul,
+  .prose ol {
+    padding-left: 1.25em;
+    margin-bottom: 1em;
+  }
+
+  /* Blockquote — flush with mobile edge */
+  .prose blockquote {
+    margin-left: -1rem;
+    padding-left: calc(1rem + 1.5em);
+  }
+
+  /* Pros & cons cards — stack vertically on mobile */
+  #pros-cons {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+
+  /* Recommendation section — stack on mobile */
+  #recommendation > div > div:last-child {
+    grid-column: 1 / -1;
+  }
+
+  /* CTA buttons — full width for easy tap */
+  .prose .cta-button,
+  .prose a[class*="btn"] {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* ============================================================
+   UTILITY CLASSES — Mobile Menu, Stars, Scrollbar
+   ============================================================ */
+
+.mobile-menu {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+.mobile-menu.open {
+  max-height: 500px;
+}
+
+.star-rating {
+  color: #e67e22;
+}
+.star-rating .star-empty {
+  color: #e8ebf0;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

@@ -1,0 +1,238 @@
+# Navigation
+- id: nav_home
+  translation: "Home"
+- id: nav_coupons
+  translation: "Coupons"
+- id: nav_reviews
+  translation: "Reviews"
+- id: nav_toplist
+  translation: "Top Picks"
+- id: nav_tips
+  translation: "Saving Tips"
+- id: nav_deals
+  translation: "Deals"
+- id: nav_products
+  translation: "Products"
+- id: nav_articles
+  translation: "Articles"
+- id: nav_brands
+  translation: "Brands"
+- id: nav_categories
+  translation: "Categories"
+- id: language_switcher
+  translation: "Language"
+- id: date_format
+  translation: "Jan 2, 2006"
+- id: search_placeholder
+  translation: "Search..."
+- id: search_all
+  translation: "Search all products, coupons and articles..."
+- id: hero_title
+  translation: "Discover Quality Products · Save with Confidence"
+- id: hero_subtitle
+  translation: "Expert Reviews + Real Deals + Curated Picks"
+- id: read_more
+  translation: "Read More"
+- id: back_to_home
+  translation: "Back to Home"
+- id: latest_products
+  translation: "Latest Products"
+- id: latest_products_subtitle
+  translation: "Editor's Picks"
+- id: latest_coupons
+  translation: "Latest Coupons"
+- id: latest_coupons_subtitle
+  translation: "Verified Promo Codes"
+- id: latest_deals
+  translation: "Latest Deals"
+- id: latest_deals_subtitle
+  translation: "Don't Miss Out"
+- id: latest_reviews
+  translation: "Latest Reviews"
+- id: latest_articles
+  translation: "Latest Articles"
+- id: view_all
+  translation: "View All"
+- id: related_products
+  translation: "Related Picks"
+- id: copy_code
+  translation: "Copy Code"
+- id: copied
+  translation: "Copied!"
+- id: expired
+  translation: "Expired"
+- id: expires
+  translation: "Valid until"
+- id: original_price
+  translation: "Original Price"
+- id: deal_price
+  translation: "Deal Price"
+- id: save
+  translation: "Save"
+- id: rating
+  translation: "Rating"
+- id: pros
+  translation: "Pros"
+- id: cons
+  translation: "Cons"
+- id: verdict
+  translation: "Verdict"
+- id: affiliate_disclaimer
+  translation: "We may earn commissions through links, which won't affect your purchase price."
+- id: no_products
+  translation: "No products"
+- id: no_coupons
+  translation: "No coupons"
+- id: no_deals
+  translation: "No deals"
+- id: page_not_found
+  translation: "Page Not Found"
+- id: page_not_found_desc
+  translation: "Sorry, the page you are looking for does not exist."
+- id: items
+  translation: "items"
+- id: browse_categories
+  translation: "Browse Categories"
+- id: subscribe_title
+  translation: "Subscribe to Deals"
+- id: subscribe_desc
+  translation: "Weekly curated product picks and exclusive deals, straight to your inbox"
+- id: subscribe_placeholder
+  translation: "Enter your email"
+- id: subscribe
+  translation: "Subscribe"
+- id: view_deal
+  translation: "View Deal →"
+- id: grab_now
+  translation: "Shop Now →"
+- id: verified
+  translation: "Verified"
+- id: time_limited
+  translation: "Limited Time"
+- id: last_updated
+  translation: "Last Updated"
+- id: product_intro
+  translation: "Product Overview"
+- id: pros_cons
+  translation: "Pros & Cons"
+- id: related_coupons
+  translation: "Related Coupons"
+- id: related_deals
+  translation: "Related Deals"
+- id: faq
+  translation: "FAQ"
+- id: related_products_section
+  translation: "Related Products"
+- id: product_summary
+  translation: "Product Summary"
+- id: table_of_contents
+  translation: "Table of Contents"
+- id: related_product
+  translation: "Related Product"
+- id: use_coupon
+  translation: "Use Coupon →"
+- id: discount_label
+  translation: "Discount"
+- id: home
+  translation: "Home"
+- id: breadcrumb_products
+  translation: "Products"
+- id: footer_about
+  translation: "About"
+- id: footer_about_us
+  translation: "About Us"
+- id: footer_contact
+  translation: "Contact"
+- id: footer_privacy
+  translation: "Privacy Policy"
+- id: footer_affiliate
+  translation: "Affiliate Disclosure"
+- id: footer_rights
+  translation: "All rights reserved"
+- id: footer_tagline
+  translation: "Professional product reviews & deals aggregator"
+- id: footer_legal
+  translation: "Legal"
+- id: footer_cookie
+  translation: "Cookie Policy"
+- id: footer_disclaimer
+  translation: "Disclaimer"
+- id: footer_refund
+  translation: "Refund & Support"
+- id: contact_email_label
+  translation: "Contact"
+# Review Page AI Optimization
+- id: rating
+  translation: "Rating"
+- id: current_price
+  translation: "Current Price"
+- id: recommendation_level
+  translation: "Recommendation Level"
+- id: recommendation_advice
+  translation: "Buying Advice"
+- id: suitable_for
+  translation: "Suitable For"
+- id: not_suitable_for
+  translation: "Not Suitable For"
+- id: final_verdict
+  translation: "Final Verdict"
+- id: original_price
+  translation: "Original Price"
+- id: cat_electronics
+  translation: "Electronics"
+- id: cat_home
+  translation: "Home & Living"
+- id: cat_beauty
+  translation: "Beauty & Care"
+- id: cat_fashion
+  translation: "Fashion"
+- id: cat_food
+  translation: "Food & Beverage"
+- id: cat_sports
+  translation: "Sports & Outdoors"
+- id: cat_books
+  translation: "Books & Stationery"
+- id: cat_toys
+  translation: "Baby & Toys"
+- id: all_brands
+  translation: "All Brands"
+- id: search_results
+  translation: "Search Results"
+- id: all
+  translation: "All"
+- id: no_results
+  translation: "No results found"
+- id: no_results_desc
+  translation: "No matching results. Try different keywords."
+- id: found_results
+  translation: "Found"
+- id: results
+  translation: "results"
+- id: search_placeholder_long
+  translation: "Enter keywords to start searching"
+- id: site_description
+  translation: "Professional product reviews, coupons and deals aggregator platform"
+- id: reviews_title
+  translation: "Product Reviews"
+- id: reviews_subtitle
+  translation: "In-depth reviews, real experiences"
+- id: articles_title
+  translation: "Articles"
+- id: articles_subtitle
+  translation: "Buying guides & practical tips"
+- id: deals_title
+  translation: "Promotions"
+- id: deals_subtitle
+  translation: "Limited-time offers, don't miss out"
+- id: coupons_title
+  translation: "Coupon Center"
+- id: coupons_subtitle
+  translation: "Verified exclusive promo codes"
+- id: category_products_desc
+  translation: "All products in this category"
+- id: brand_products_desc
+  translation: "'s products and offers"
+- id: brand_coupons
+  translation: "Coupons"
+- id: view_details
+  translation: "View details →"

@@ -3,7 +3,7 @@
 <head>
   {{ partial "head.html" . }}
 </head>
-<body class="flex flex-col min-h-screen bg-gray-50 text-gray-900 font-sans antialiased">
+<body class="flex flex-col min-h-screen bg-neutral-light">
   {{ partial "header.html" . }}
   <main class="flex-grow">
     {{ block "main" . }}{{ end }}
@@ -16,41 +16,25 @@
         const box = document.getElementById(boxId);
         const btn = box.querySelector('button');
         const text = btn.querySelector('.copy-text');
-        text.textContent = '已复制!';
-        btn.classList.remove('bg-primary-600','hover:bg-primary-700');
-        btn.classList.add('bg-accent-500');
+        text.textContent = '{{ i18n "copied" }}';
+        btn.classList.remove('bg-brand','hover:bg-brand-light');
+        btn.classList.add('bg-accent');
         setTimeout(() => {
-          text.textContent = '复制优惠码';
-          btn.classList.remove('bg-accent-500');
-          btn.classList.add('bg-primary-600','hover:bg-primary-700');
+          text.textContent = '{{ i18n "copy_code" }}';
+          btn.classList.remove('bg-accent');
+          btn.classList.add('bg-brand','hover:bg-brand-light');
         }, 2000);
       });
     }
   </script>
-  <!-- Pagefind Search (production only) -->
-  {{ if and .Site.Params.search.enabled (not hugo.IsServer) }}
-    <script src="/pagefind/pagefind-ui.js"></script>
-    <div id="search-container" class="hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-sm" onclick="closeSearch(event)">
-      <div class="max-w-2xl mx-auto mt-24 mx-4" onclick="event.stopPropagation()">
-        <div class="bg-white rounded-2xl shadow-2xl p-4">
-          <div id="search"></div>
-        </div>
-      </div>
-    </div>
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        if (typeof PagefindUI !== 'undefined') {
-          new PagefindUI({ element: "#search", showSubResults: true, showEmptyFilters: false, pageSize: 10 });
-        }
-      });
-      const searchTrigger = document.getElementById('search-trigger');
-      const searchContainer = document.getElementById('search-container');
-      if (searchTrigger && searchContainer) {
-        searchTrigger.addEventListener('click', () => { searchContainer.classList.remove('hidden'); });
+  <!-- Keyboard shortcut: press / to go to search -->
+  <script>
+    document.addEventListener('keydown', (e) => {
+      if (e.key === '/' && !['INPUT','TEXTAREA'].includes(document.activeElement.tagName)) {
+        e.preventDefault();
+        window.location.href = '/search/';
       }
-      function closeSearch(event) { if (event.target === searchContainer) { searchContainer.classList.add('hidden'); } }
-      document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && searchContainer) { searchContainer.classList.add('hidden'); } });
-    </script>
-  {{ end }}
+    });
+  </script>
 </body>
 </html>

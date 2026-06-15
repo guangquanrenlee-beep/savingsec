@@ -8,7 +8,16 @@ category: []
 tags: []
 related_product: ""
 rating: 0
-author: "ProductPick Team"
+price: ""
+original_price: ""
+affiliate_link: ""
+author: "SavingSecretary Team"
 last_updated: {{ .Date }}
 description: ""
+pros: []
+cons: []
+recommend_for: ""
+not_recommend_for: ""
+final_verdict: ""
+recommendation_level: ""
 ---

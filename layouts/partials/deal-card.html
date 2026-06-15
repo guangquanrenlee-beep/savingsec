@@ -1,30 +1,32 @@
 {{ $deal := .deal }}
-<article class="card bg-white rounded-xl shadow-card hover:shadow-card-hover transition-all duration-300 p-5">
-  <div class="flex items-start gap-4">
-    <!-- Discount -->
-    <div class="flex-shrink-0 w-16 h-16 bg-danger-50 rounded-xl flex items-center justify-center">
-      <span class="text-lg font-bold text-danger-600">{{ $deal.Params.discount_rate }}</span>
-    </div>
-    <!-- Content -->
-    <div class="flex-1 min-w-0">
-      <h3 class="text-base font-semibold text-gray-900">
-        <a href="{{ $deal.RelPermalink }}" class="hover:text-primary-600">{{ $deal.Title }}</a>
-      </h3>
-      {{ with $deal.Params.brand }}
-        <a href="/brand/{{ . | urlize }}/" class="text-sm text-primary-600 hover:text-primary-700">{{ . }}</a>
-      {{ end }}
-      <div class="flex items-center gap-2 mt-2">
-        {{ with $deal.Params.price }}<span class="text-lg font-bold text-danger-600">{{ . }}</span>{{ end }}
-        {{ with $deal.Params.original_price }}<span class="text-sm text-gray-400 line-through">{{ . }}</span>{{ end }}
+<article class="card">
+  <div class="p-6">
+    <div class="flex items-start gap-4">
+      <!-- Discount -->
+      <div class="flex-shrink-0 w-16 h-16 bg-accent/10 rounded-lg flex items-center justify-center">
+        <span class="text-base font-bold text-accent">{{ $deal.Params.discount_rate }}</span>
       </div>
+      <!-- Content -->
+      <div class="flex-1 min-w-0">
+        <h3 class="text-[15px] font-semibold text-brand line-clamp-1">
+          <a href="{{ $deal.RelPermalink }}" class="hover:text-accent transition-colors">{{ $deal.Title }}</a>
+        </h3>
+        {{ with $deal.Params.brand }}
+          <a href="/brand/{{ . | urlize }}/" class="text-[13px] text-accent hover:text-accent-light transition-colors">{{ . }}</a>
+        {{ end }}
+        <div class="flex items-center gap-2 mt-2">
+          {{ with $deal.Params.price }}<span class="text-lg font-bold text-accent">{{ . }}</span>{{ end }}
+          {{ with $deal.Params.original_price }}<span class="text-[13px] text-neutral-muted line-through">{{ . }}</span>{{ end }}
+        </div>
+      </div>
+      {{ if $deal.Params.time_limited }}
+        <span class="flex-shrink-0 tag-accent">{{ i18n "time_limited" }}</span>
+      {{ end }}
     </div>
-    {{ if $deal.Params.time_limited }}
-      <span class="flex-shrink-0 px-2 py-1 text-xs font-medium text-danger-700 bg-danger-50 rounded-full">限时</span>
+    {{ with $deal.Params.affiliate_link }}
+      <a href="{{ . }}" class="mt-4 block w-full text-center px-4 py-2.5 bg-brand text-white text-[14px] font-medium rounded-lg hover:bg-brand-light transition-all duration-200" target="_blank" rel="nofollow sponsored">
+        {{ i18n "grab_now" }}
+      </a>
     {{ end }}
   </div>
-  {{ with $deal.Params.affiliate_link }}
-    <a href="{{ . }}" class="mt-4 block w-full text-center px-4 py-2.5 bg-danger-500 text-white font-medium rounded-lg hover:bg-danger-600 transition-colors" target="_blank" rel="nofollow sponsored">
-      立即抢购 →
-    </a>
-  {{ end }}
 </article>

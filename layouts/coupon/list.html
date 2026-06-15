@@ -1,8 +1,8 @@
 {{ define "main" }}
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
-  <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-2">优惠券中心</h1>
-  <p class="text-lg text-gray-600 mb-8">已验证的独家优惠码</p>
-  <div class="grid gap-4">
+<div class="max-w-content mx-auto px-6 py-12">
+  <h1 class="text-2xl font-semibold text-brand mb-2">{{ i18n "coupons_title" }}</h1>
+  <p class="text-sm text-neutral-muted mb-8">{{ i18n "coupons_subtitle" }}</p>
+  <div class="grid gap-5">
     {{ range .Pages }}
       {{ partial "coupon-card" (dict "coupon" .) }}
     {{ end }}
