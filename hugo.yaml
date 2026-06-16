@@ -45,7 +45,8 @@ languages:
 enableRobotsTXT: true
 enableGitInfo: true
 enableEmoji: true
-paginate: 20
+pagination:
+  pagerSize: 20
 
 summaryLength: 160
 

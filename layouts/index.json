@@ -1,9 +1,7 @@
 {{- $allPages := slice -}}
-{{- range hugo.Sites -}}
-  {{- range .AllPages -}}
-    {{- if and (eq .Kind "page") (not .Params.noindex) -}}
-      {{- $allPages = $allPages | append . -}}
-    {{- end -}}
+{{- range .Site.AllPages -}}
+  {{- if and (eq .Kind "page") (not .Params.noindex) -}}
+    {{- $allPages = $allPages | append . -}}
   {{- end -}}
 {{- end -}}
 [{{- range $i, $page := $allPages -}}
