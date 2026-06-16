@@ -5,6 +5,11 @@
   <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
     {{ range .Pages }}
       <article class="card">
+        {{ with .Params.image }}
+        <div class="w-full h-48 overflow-hidden rounded-t-lg">
+          <img src="{{ . }}" alt="{{ $.Title }}" class="w-full h-full object-cover" loading="lazy">
+        </div>
+        {{ end }}
         <div class="p-6">
           {{ with .Params.brand }}<a href="/brand/{{ . | urlize }}/" class="text-xs font-medium text-accent hover:text-accent-light transition-colors">{{ . }}</a>{{ end }}
           <h3 class="text-[15px] font-semibold text-brand mt-1 mb-2"><a href="{{ .RelPermalink }}" class="hover:text-accent transition-colors">{{ .Title }}</a></h3>

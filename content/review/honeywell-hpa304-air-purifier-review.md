@@ -10,6 +10,7 @@ draft: false
 rating: 4.2
 author: "SavingSec Team"
 product_name: "Honeywell AllergenPlus HEPA Air Purifier HPA304"
+image: "/images/honeywell-hpa304.png"
 ---
 
 ## ⚠️ Affiliate Disclosure
@@ -17,6 +18,8 @@ product_name: "Honeywell AllergenPlus HEPA Air Purifier HPA304"
 As an Amazon Associate, I earn from qualifying purchases. This post contains affiliate links. If you click through and make a purchase, I may receive a small commission at no extra cost to you, which helps support in‑depth, unbiased content.
 
 ---
+
+![Honeywell HPA304 Air Purifier](/images/honeywell-hpa304.png)
 
 ## 📋 Table of Contents
 
