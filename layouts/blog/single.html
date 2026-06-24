@@ -1,11 +1,16 @@
 {{ define "main" }}
 <article class="max-w-4xl mx-auto px-6 py-10">
   <nav class="flex items-center text-[13px] text-neutral-muted mb-8">
-    <a href="/" class="hover:text-brand transition-colors">{{ i18n "home" }}</a><span class="mx-2">/</span>
-    <a href="/blog/" class="hover:text-brand transition-colors">{{ i18n "nav_articles" }}</a><span class="mx-2">/</span>
+    <a href="{{ relLangURL "/" }}" class="hover:text-brand transition-colors">{{ i18n "home" }}</a><span class="mx-2">/</span>
+    <a href="{{ relLangURL "/blog/" }}" class="hover:text-brand transition-colors">{{ i18n "nav_articles" }}</a><span class="mx-2">/</span>
     <span class="text-brand">{{ .Title }}</span>
   </nav>
   <header class="mb-8">
+    {{ with .Params.image }}
+    <div class="img-container-16x9 mb-6 rounded-xl overflow-hidden shadow-md">
+      <img src="{{ . }}" alt="{{ $.Title }}" class="w-full h-full object-cover">
+    </div>
+    {{ end }}
     <h1 class="text-2xl font-semibold text-brand mb-3">{{ .Title }}</h1>
     {{ with .Params.description }}<p class="text-base text-neutral-text leading-relaxed mb-4">{{ . }}</p>{{ end }}
     <div class="flex items-center gap-4 text-sm text-neutral-muted">

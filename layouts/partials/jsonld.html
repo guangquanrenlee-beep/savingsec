@@ -96,6 +96,12 @@
     "brand": {
       "@type": "Brand",
       "name": "{{ .Params.brand | default (.Params.product_name | default .Title) }}"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "{{ .Params.rating | default "4" }}",
+      "bestRating": "5",
+      "worstRating": "1"
     }
   },
   "mainEntityOfPage": { "@type": "WebPage", "@id": "{{ .Permalink }}" }

@@ -1,8 +1,14 @@
 # SavingSec 一键部署脚本
 # 修改源文件后，运行此脚本自动构建并部署
 
-Write-Host "[1/3] 正在构建网站..." -ForegroundColor Cyan
-hugo --gc --minify
+Write-Host "[0/4] 清理旧的 public 目录..." -ForegroundColor Cyan
+if (Test-Path "public") {
+    Remove-Item -Recurse -Force "public"
+    Write-Host "清理完成" -ForegroundColor Green
+}
+
+Write-Host "`n[1/4] 正在构建网站..." -ForegroundColor Cyan
+hugo --gc --minify -b "https://savingsec.com/"
 if ($LASTEXITCODE -ne 0) {
     Write-Host "构建失败！" -ForegroundColor Red
     exit 1

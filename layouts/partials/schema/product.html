@@ -1,0 +1,51 @@
+{{/* Product Schema */}}
+{{ if eq .Section "product" }}
+<script type="application/ld+json">
+{{- $currency := .Params.currency | default "USD" -}}
+{{- $price := .Params.price | default 0 -}}
+{{- $brandName := .Params.brand | default .Site.Params.siteName -}}
+{{- $siteName := .Site.Params.siteName -}}
+{{- $imageURL := "" -}}
+{{- with .Params.featured_image }}{{ $imageURL = . | absURL }}{{ else }}{{ with .Params.image }}{{ $imageURL = . | absURL }}{{ end }}{{ end -}}
+{{- $productURL := .Permalink -}}
+{{- with .Params.affiliate_link }}{{ $productURL = . }}{{ end -}}
+{{- $schema := dict
+  "@context" "https://schema.org"
+  "@type" "Product"
+  "name" .Title
+  "description" (.Params.description | default .Summary | truncate 200)
+  "url" $productURL
+  "brand" (dict
+    "@type" "Brand"
+    "name" $brandName
+  )
+  "offers" (dict
+    "@type" "Offer"
+    "url" $productURL
+    "price" $price
+    "priceCurrency" $currency
+    "availability" "https://schema.org/InStock"
+  )
+  "mainEntityOfPage" (dict
+    "@type" "WebPage"
+    "@id" .Permalink
+  )
+-}}
+{{- if $imageURL -}}
+{{- $schema = merge $schema (dict "image" $imageURL) -}}
+{{- end -}}
+{{- if .Params.original_price -}}
+{{- $offers := index $schema "offers" -}}
+{{- $updatedOffers := merge $offers (dict "listPrice" .Params.original_price) -}}
+{{- $schema = merge $schema (dict "offers" $updatedOffers) -}}
+{{- end -}}
+{{- if .Params.rating -}}
+{{- $schema = merge $schema (dict "aggregateRating" (dict
+  "@type" "AggregateRating"
+  "ratingValue" .Params.rating
+  "bestRating" "5"
+)) -}}
+{{- end -}}
+{{ $schema | jsonify | safeJS }}
+</script>
+{{ end }}

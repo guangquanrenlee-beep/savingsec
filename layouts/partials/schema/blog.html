@@ -1,0 +1,38 @@
+{{/* Blog Schema: Article */}}
+{{ if eq .Section "blog" }}
+<script type="application/ld+json">
+{{- $authorName := .Params.author | default .Site.Params.author -}}
+{{- $siteName := .Site.Params.siteName -}}
+{{- $imageURL := "" -}}
+{{- with .Params.featured_image }}{{ $imageURL = . | absURL }}{{ else }}{{ with .Params.image }}{{ $imageURL = . | absURL }}{{ end }}{{ end -}}
+{{- $schema := dict
+  "@context" "https://schema.org"
+  "@type" "Article"
+  "headline" .Title
+  "description" (.Params.description | default .Summary | truncate 200)
+  "datePublished" (.Date.Format "2006-01-02T15:04:05Z07:00")
+  "dateModified" ((.Params.last_updated | default .Params.lastmod | default .Lastmod) | time.Format "2006-01-02T15:04:05Z07:00")
+  "author" (dict
+    "@type" "Person"
+    "name" $authorName
+    "url" (.Site.BaseURL | strings.TrimSuffix "/")
+  )
+  "publisher" (dict
+    "@type" "Organization"
+    "name" $siteName
+    "logo" (dict
+      "@type" "ImageObject"
+      "url" (.Site.Params.logo | absURL)
+    )
+  )
+  "mainEntityOfPage" (dict
+    "@type" "WebPage"
+    "@id" .Permalink
+  )
+-}}
+{{- if $imageURL -}}
+{{- $schema = merge $schema (dict "image" $imageURL) -}}
+{{- end -}}
+{{ $schema | jsonify | safeJS }}
+</script>
+{{ end }}

@@ -1,0 +1,48 @@
+{{/* Coupon Schema: Product + Offer */}}
+{{ if eq .Section "coupon" }}
+<script type="application/ld+json">
+{{- $currency := .Params.currency | default "USD" -}}
+{{- $price := .Params.price | default 0 -}}
+{{- $availability := .Params.availability | default "https://schema.org/OnlineOnly" -}}
+{{- $brandName := .Params.brand | default .Site.Params.siteName -}}
+{{- $siteName := .Site.Params.siteName -}}
+{{- $imageURL := "" -}}
+{{- with .Params.featured_image }}{{ $imageURL = . | absURL }}{{ else }}{{ with .Params.image }}{{ $imageURL = . | absURL }}{{ end }}{{ end -}}
+{{- $productURL := .Permalink -}}
+{{- with .Params.affiliate_link }}{{ $productURL = . }}{{ end -}}
+{{- $schema := dict
+  "@context" "https://schema.org"
+  "@type" "Product"
+  "name" .Title
+  "description" (.Params.description | default .Summary | truncate 200)
+  "brand" (dict
+    "@type" "Brand"
+    "name" $brandName
+  )
+  "offers" (dict
+    "@type" "Offer"
+    "url" $productURL
+    "price" $price
+    "priceCurrency" $currency
+    "availability" $availability
+    "seller" (dict
+      "@type" "Organization"
+      "name" $siteName
+    )
+  )
+  "mainEntityOfPage" (dict
+    "@type" "WebPage"
+    "@id" .Permalink
+  )
+-}}
+{{- if $imageURL -}}
+{{- $schema = merge $schema (dict "image" $imageURL) -}}
+{{- end -}}
+{{- if .Params.price_valid_until -}}
+{{- $offers := index $schema "offers" -}}
+{{- $updatedOffers := merge $offers (dict "priceValidUntil" .Params.price_valid_until) -}}
+{{- $schema = merge $schema (dict "offers" $updatedOffers) -}}
+{{- end -}}
+{{ $schema | jsonify | safeJS }}
+</script>
+{{ end }}

@@ -10,7 +10,7 @@ draft: false
 rating: 4.5
 author: "SavingSec Team"
 product_name: "Systeme.io"
-image: "/images/systeme-io.png"
+image: "/images/systeme-io.jpg"
 ---
 
 ## Meine ehrliche Einschätzung nach 6 Monaten Nutzung

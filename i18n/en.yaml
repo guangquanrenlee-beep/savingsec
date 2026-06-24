@@ -8,7 +8,7 @@
 - id: nav_toplist
   translation: "Top Picks"
 - id: nav_tips
-  translation: "Saving Tips"
+  translation: "Blog"
 - id: nav_deals
   translation: "Deals"
 - id: nav_products
@@ -51,6 +51,8 @@
   translation: "Latest Reviews"
 - id: latest_articles
   translation: "Latest Articles"
+- id: latest_articles_subtitle
+  translation: "Buying guides, tips & insights"
 - id: view_all
   translation: "View All"
 - id: related_products
@@ -236,3 +238,7 @@
   translation: "Coupons"
 - id: view_details
   translation: "View details →"
+- id: view_more
+  translation: "View More"
+- id: view_less
+  translation: "View Less"

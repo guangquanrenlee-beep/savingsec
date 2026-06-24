@@ -10,7 +10,7 @@ draft: false
 rating: 4.5
 author: "SavingSec Team"
 product_name: "Systeme.io"
-image: "/images/systeme-io.png"
+image: "/images/systeme-io.jpg"
 ---
 
 ## 6ヶ月使用した後の正直な評価

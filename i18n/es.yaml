@@ -7,7 +7,7 @@
 - id: nav_toplist
   translation: "Top Picks"
 - id: nav_tips
-  translation: "Consejos"
+  translation: "Blog"
 - id: nav_deals
   translation: "Ofertas"
 - id: nav_products
@@ -49,7 +49,9 @@
 - id: latest_reviews
   translation: "Últimas reseñas"
 - id: latest_articles
-  translation: "Últimos artículos"
+  translation: "Últimos Artículos"
+- id: latest_articles_subtitle
+  translation: "Guías de compra, consejos e ideas"
 - id: view_all
   translation: "Ver todo"
 - id: related_products
@@ -235,3 +237,7 @@
   translation: "Cupones"
 - id: view_details
   translation: "Ver detalles →"
+- id: view_more
+  translation: "Ver Más"
+- id: view_less
+  translation: "Ver Menos"

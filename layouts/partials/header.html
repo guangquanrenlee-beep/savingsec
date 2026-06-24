@@ -2,7 +2,7 @@
   <div style="max-width:1280px;margin:0 auto;padding:0 24px;">
     <div style="display:flex;align-items:center;justify-content:space-between;height:70px;">
       <!-- Logo -->
-      <a href="/" style="display:flex;align-items:center;gap:14px;text-decoration:none;flex-shrink:0;">
+      <a href="{{ relLangURL "/" }}" style="display:flex;align-items:center;gap:14px;text-decoration:none;flex-shrink:0;">
         <svg style="width:32px;height:32px;color:#e67e22;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M12 2L2 7l10 5 10-5-10-5z"/>
           <path d="M2 17l10 5 10-5"/>
@@ -13,11 +13,11 @@
 
       <!-- Desktop Nav -->
       <nav style="display:none;gap:8px;" role="navigation" id="desktop-nav">
-        <a href="/" style="padding:10px 24px;font-size:16px;font-weight:500;color:rgba(255,255,255,0.8);border-radius:10px;text-decoration:none;transition:all 0.2s linear;" onmouseover="this.style.color='#fff';this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.color='rgba(255,255,255,0.8)';this.style.background='transparent'">{{ i18n "nav_home" }}</a>
-        <a href="/coupon/" style="padding:10px 24px;font-size:16px;font-weight:500;color:rgba(255,255,255,0.8);border-radius:10px;text-decoration:none;transition:all 0.2s linear;" onmouseover="this.style.color='#fff';this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.color='rgba(255,255,255,0.8)';this.style.background='transparent'">{{ i18n "nav_coupons" }}</a>
-        <a href="/review/" style="padding:10px 24px;font-size:16px;font-weight:500;color:rgba(255,255,255,0.8);border-radius:10px;text-decoration:none;transition:all 0.2s linear;" onmouseover="this.style.color='#fff';this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.color='rgba(255,255,255,0.8)';this.style.background='transparent'">{{ i18n "nav_reviews" }}</a>
-        <a href="/product/" style="padding:10px 24px;font-size:16px;font-weight:500;color:rgba(255,255,255,0.8);border-radius:10px;text-decoration:none;transition:all 0.2s linear;" onmouseover="this.style.color='#fff';this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.color='rgba(255,255,255,0.8)';this.style.background='transparent'">{{ i18n "nav_toplist" }}</a>
-        <a href="/blog/" style="padding:10px 24px;font-size:16px;font-weight:500;color:rgba(255,255,255,0.8);border-radius:10px;text-decoration:none;transition:all 0.2s linear;" onmouseover="this.style.color='#fff';this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.color='rgba(255,255,255,0.8)';this.style.background='transparent'">{{ i18n "nav_tips" }}</a>
+        <a href="{{ relLangURL "/" }}" style="padding:10px 24px;font-size:16px;font-weight:500;color:rgba(255,255,255,0.8);border-radius:10px;text-decoration:none;transition:all 0.2s linear;" onmouseover="this.style.color='#fff';this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.color='rgba(255,255,255,0.8)';this.style.background='transparent'">{{ i18n "nav_home" }}</a>
+        <a href="{{ relLangURL "/coupon/" }}" style="padding:10px 24px;font-size:16px;font-weight:500;color:rgba(255,255,255,0.8);border-radius:10px;text-decoration:none;transition:all 0.2s linear;" onmouseover="this.style.color='#fff';this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.color='rgba(255,255,255,0.8)';this.style.background='transparent'">{{ i18n "nav_coupons" }}</a>
+        <a href="{{ relLangURL "/review/" }}" style="padding:10px 24px;font-size:16px;font-weight:500;color:rgba(255,255,255,0.8);border-radius:10px;text-decoration:none;transition:all 0.2s linear;" onmouseover="this.style.color='#fff';this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.color='rgba(255,255,255,0.8)';this.style.background='transparent'">{{ i18n "nav_reviews" }}</a>
+        <a href="{{ relLangURL "/product/" }}" style="padding:10px 24px;font-size:16px;font-weight:500;color:rgba(255,255,255,0.8);border-radius:10px;text-decoration:none;transition:all 0.2s linear;" onmouseover="this.style.color='#fff';this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.color='rgba(255,255,255,0.8)';this.style.background='transparent'">{{ i18n "nav_toplist" }}</a>
+        <a href="{{ relLangURL "/blog/" }}" style="padding:10px 24px;font-size:16px;font-weight:500;color:rgba(255,255,255,0.8);border-radius:10px;text-decoration:none;transition:all 0.2s linear;" onmouseover="this.style.color='#fff';this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.color='rgba(255,255,255,0.8)';this.style.background='transparent'">{{ i18n "nav_tips" }}</a>
       </nav>
 
       <!-- Right side -->
@@ -30,9 +30,20 @@
           </button>
           <!-- Dropdown -->
           <div id="lang-dropdown" style="display:none;position:absolute;right:0;top:100%;margin-top:4px;width:144px;background:#fff;border-radius:10px;box-shadow:0 10px 30px rgba(0,0,0,0.12);border:1px solid #e8ebf0;padding:4px 0;z-index:50;">
+            {{ $currentPage := . }}
             {{ $currentLang := .Site.Language.Lang }}
             {{ range .Site.Sites }}
-            <a href="/{{ .Language.Lang }}/" style="display:block;padding:8px 14px;font-size:14px;color:{{ if eq .Language.Lang $currentLang }}#192945;font-weight:500;{{ else }}#444;{{ end }}background:{{ if eq .Language.Lang $currentLang }}rgba(25,41,69,0.05);{{ else }}transparent;{{ end }}text-decoration:none;transition:background 0.2s;" data-lang="{{ .Language.Lang }}" onmouseover="this.style.background='{{ if eq .Language.Lang $currentLang }}rgba(25,41,69,0.05){{ else }}#f7f8fa{{ end }}'" onmouseout="this.style.background='{{ if eq .Language.Lang $currentLang }}rgba(25,41,69,0.05){{ else }}transparent{{ end }}'">
+              {{ $targetLang := .Language.Lang }}
+              {{ $targetURL := "" }}
+              {{ range $currentPage.AllTranslations }}
+                {{ if eq .Language.Lang $targetLang }}
+                  {{ $targetURL = .RelPermalink }}
+                {{ end }}
+              {{ end }}
+              {{ if eq $targetURL "" }}
+                {{ $targetURL = relLangURL "/" }}
+              {{ end }}
+            <a href="{{ $targetURL }}" style="display:block;padding:8px 14px;font-size:14px;color:{{ if eq $targetLang $currentLang }}#192945;font-weight:500;{{ else }}#444;{{ end }}background:{{ if eq $targetLang $currentLang }}rgba(25,41,69,0.05);{{ else }}transparent;{{ end }}text-decoration:none;transition:background 0.2s;" data-lang="{{ $targetLang }}" onmouseover="this.style.background='{{ if eq $targetLang $currentLang }}rgba(25,41,69,0.05){{ else }}#f7f8fa{{ end }}'" onmouseout="this.style.background='{{ if eq $targetLang $currentLang }}rgba(25,41,69,0.05){{ else }}transparent{{ end }}'">
               {{ .Language.LanguageName }}
             </a>
             {{ end }}
@@ -50,11 +61,11 @@
     <!-- Mobile Menu -->
     <nav id="mobile-menu" style="border-top:1px solid rgba(255,255,255,0.1);overflow:hidden;transition:max-height 0.3s ease;max-height:0;display:none;" role="navigation">
       <div style="padding:8px 0;">
-        <a href="/" style="display:block;padding:14px;font-size:16px;font-weight:500;color:rgba(255,255,255,0.8);text-decoration:none;border-radius:10px;transition:all 0.2s;" onmouseover="this.style.color='#fff';this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.color='rgba(255,255,255,0.8)';this.style.background='transparent'">{{ i18n "nav_home" }}</a>
-        <a href="/coupon/" style="display:block;padding:14px;font-size:16px;font-weight:500;color:rgba(255,255,255,0.8);text-decoration:none;border-radius:10px;transition:all 0.2s;" onmouseover="this.style.color='#fff';this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.color='rgba(255,255,255,0.8)';this.style.background='transparent'">{{ i18n "nav_coupons" }}</a>
-        <a href="/review/" style="display:block;padding:14px;font-size:16px;font-weight:500;color:rgba(255,255,255,0.8);text-decoration:none;border-radius:10px;transition:all 0.2s;" onmouseover="this.style.color='#fff';this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.color='rgba(255,255,255,0.8)';this.style.background='transparent'">{{ i18n "nav_reviews" }}</a>
-        <a href="/product/" style="display:block;padding:14px;font-size:16px;font-weight:500;color:rgba(255,255,255,0.8);text-decoration:none;border-radius:10px;transition:all 0.2s;" onmouseover="this.style.color='#fff';this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.color='rgba(255,255,255,0.8)';this.style.background='transparent'">{{ i18n "nav_toplist" }}</a>
-        <a href="/blog/" style="display:block;padding:14px;font-size:16px;font-weight:500;color:rgba(255,255,255,0.8);text-decoration:none;border-radius:10px;transition:all 0.2s;" onmouseover="this.style.color='#fff';this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.color='rgba(255,255,255,0.8)';this.style.background='transparent'">{{ i18n "nav_tips" }}</a>
+        <a href="{{ relLangURL "/" }}" style="display:block;padding:14px;font-size:16px;font-weight:500;color:rgba(255,255,255,0.8);text-decoration:none;border-radius:10px;transition:all 0.2s;" onmouseover="this.style.color='#fff';this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.color='rgba(255,255,255,0.8)';this.style.background='transparent'">{{ i18n "nav_home" }}</a>
+        <a href="{{ relLangURL "/coupon/" }}" style="display:block;padding:14px;font-size:16px;font-weight:500;color:rgba(255,255,255,0.8);text-decoration:none;border-radius:10px;transition:all 0.2s;" onmouseover="this.style.color='#fff';this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.color='rgba(255,255,255,0.8)';this.style.background='transparent'">{{ i18n "nav_coupons" }}</a>
+        <a href="{{ relLangURL "/review/" }}" style="display:block;padding:14px;font-size:16px;font-weight:500;color:rgba(255,255,255,0.8);text-decoration:none;border-radius:10px;transition:all 0.2s;" onmouseover="this.style.color='#fff';this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.color='rgba(255,255,255,0.8)';this.style.background='transparent'">{{ i18n "nav_reviews" }}</a>
+        <a href="{{ relLangURL "/product/" }}" style="display:block;padding:14px;font-size:16px;font-weight:500;color:rgba(255,255,255,0.8);text-decoration:none;border-radius:10px;transition:all 0.2s;" onmouseover="this.style.color='#fff';this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.color='rgba(255,255,255,0.8)';this.style.background='transparent'">{{ i18n "nav_toplist" }}</a>
+        <a href="{{ relLangURL "/blog/" }}" style="display:block;padding:14px;font-size:16px;font-weight:500;color:rgba(255,255,255,0.8);text-decoration:none;border-radius:10px;transition:all 0.2s;" onmouseover="this.style.color='#fff';this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.color='rgba(255,255,255,0.8)';this.style.background='transparent'">{{ i18n "nav_tips" }}</a>
       </div>
     </nav>
   </div>

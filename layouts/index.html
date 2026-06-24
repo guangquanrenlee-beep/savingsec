@@ -17,48 +17,59 @@
 {{ $coupons := where .Site.RegularPages "Section" "coupon" }}
 {{ $deals := where .Site.RegularPages "Section" "deal" }}
 {{ $reviews := where .Site.RegularPages "Section" "review" }}
+{{ $blogs := where .Site.RegularPages "Section" "blog" }}
 
 <!-- Limited Coupons Zone -->
 {{ if $coupons }}
-<section class="section-padding bg-white">
+<section class="section-padding bg-white" id="section-coupons">
   <div class="max-w-content mx-auto px-6">
     <div class="flex items-center justify-between mb-8">
       <div>
         <h2 class="text-xl font-semibold text-brand">{{ i18n "latest_coupons" }}</h2>
         <p class="text-sm text-neutral-muted mt-1">{{ i18n "latest_coupons_subtitle" }}</p>
       </div>
-      <a href="/coupon/" class="text-sm font-medium text-brand hover:text-accent transition-colors">{{ i18n "view_all" }} →</a>
+      <a href="{{ relLangURL "/coupon/" }}" class="text-sm font-medium text-brand hover:text-accent transition-colors">{{ i18n "view_all" }} →</a>
     </div>
-    <div class="grid gap-5 md:grid-cols-2">
-      {{ range first 6 $coupons }}
+    <div class="grid gap-5 md:grid-cols-2" id="coupons-grid">
+      {{ range first 4 $coupons }}
         {{ partial "coupon-card" (dict "coupon" .) }}
       {{ end }}
     </div>
+    {{ if gt (len $coupons) 4 }}
+    <div class="extra-items hidden" id="coupons-extra" style="display:none;">
+      <div class="grid gap-5 md:grid-cols-2 mt-5">
+        {{ range after 4 $coupons }}
+          {{ partial "coupon-card" (dict "coupon" .) }}
+        {{ end }}
+      </div>
+    </div>
+    <div class="text-center mt-8">
+      <button class="view-more-btn" data-section="coupons" style="padding:10px 28px;background:#192945;color:#fff;font-weight:500;border:none;border-radius:10px;font-size:14px;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.background='#e67e22'" onmouseout="this.style.background='#192945'">
+        <span class="btn-text">{{ i18n "view_more" }}</span>
+        <span class="btn-icon" style="display:inline-block;margin-left:6px;transition:transform 0.3s;">▼</span>
+      </button>
+    </div>
+    {{ end }}
   </div>
 </section>
 {{ end }}
 
 <!-- Latest Reviews (Waterfall) -->
 {{ if $reviews }}
-<section class="section-padding bg-neutral-light">
+<section class="section-padding bg-neutral-light" id="section-reviews">
   <div class="max-w-content mx-auto px-6">
     <div class="flex items-center justify-between mb-8">
       <div>
         <h2 class="text-xl font-semibold text-brand">{{ i18n "reviews_title" }}</h2>
         <p class="text-sm text-neutral-muted mt-1">{{ i18n "reviews_subtitle" }}</p>
       </div>
-      <a href="/review/" class="text-sm font-medium text-brand hover:text-accent transition-colors">{{ i18n "view_all" }} →</a>
+      <a href="{{ relLangURL "/review/" }}" class="text-sm font-medium text-brand hover:text-accent transition-colors">{{ i18n "view_all" }} →</a>
     </div>
-    <div class="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6">
-      {{ range first 6 $reviews }}
-        <article class="card break-inside-avoid">
-          {{ with .Params.image }}
-          <div class="w-full h-48 overflow-hidden rounded-t-lg">
-            <img src="{{ . }}" alt="{{ $.Title }}" class="w-full h-full object-cover" loading="lazy">
-          </div>
-          {{ end }}
-          <div class="p-6">
-            {{ with .Params.brand }}<a href="/brand/{{ . | urlize }}/" class="text-xs font-medium text-accent hover:text-accent-light transition-colors">{{ . }}</a>{{ end }}
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3" id="reviews-grid">
+      {{ range first 3 $reviews }}
+        <article class="card">
+          <div class="card-body p-6">
+            {{ with .Params.brand }}<a href="{{ relLangURL (printf "/brand/%s/" (. | urlize)) }}" class="text-xs font-medium text-accent hover:text-accent-light transition-colors">{{ . }}</a>{{ end }}
             <h3 class="text-[15px] font-semibold text-brand mt-1 mb-2"><a href="{{ .RelPermalink }}" class="hover:text-accent transition-colors">{{ .Title }}</a></h3>
             {{ with .Params.description }}<p class="text-sm text-neutral-text leading-relaxed line-clamp-3 mb-3">{{ . }}</p>{{ end }}
             {{ with .Params.rating }}
@@ -78,28 +89,132 @@
         </article>
       {{ end }}
     </div>
+    {{ if gt (len $reviews) 3 }}
+    <div class="extra-items hidden" id="reviews-extra" style="display:none;">
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 mt-6">
+        {{ range after 3 $reviews }}
+          <article class="card">
+            <div class="card-body p-6">
+              {{ with .Params.brand }}<a href="{{ relLangURL (printf "/brand/%s/" (. | urlize)) }}" class="text-xs font-medium text-accent hover:text-accent-light transition-colors">{{ . }}</a>{{ end }}
+              <h3 class="text-[15px] font-semibold text-brand mt-1 mb-2"><a href="{{ .RelPermalink }}" class="hover:text-accent transition-colors">{{ .Title }}</a></h3>
+              {{ with .Params.description }}<p class="text-sm text-neutral-text leading-relaxed line-clamp-3 mb-3">{{ . }}</p>{{ end }}
+              {{ with .Params.rating }}
+                {{ $rating := . }}
+                <div class="flex items-center mb-3">
+                  <div class="flex items-center star-rating">
+                    {{ range seq 5 }}{{ if le . $rating }}★{{ else }}<span class="star-empty">☆</span>{{ end }}{{ end }}
+                  </div>
+                  <span class="ml-2 text-[13px] text-neutral-muted">{{ $rating }}/5</span>
+                </div>
+              {{ end }}
+              <div class="flex items-center justify-between text-[13px] text-neutral-muted">
+                <span>{{ .Params.author }}</span>
+                <span>{{ .Params.last_updated | time.Format (i18n "date_format") }}</span>
+              </div>
+            </div>
+          </article>
+        {{ end }}
+      </div>
+    </div>
+    <div class="text-center mt-8">
+      <button class="view-more-btn" data-section="reviews" style="padding:10px 28px;background:#192945;color:#fff;font-weight:500;border:none;border-radius:10px;font-size:14px;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.background='#e67e22'" onmouseout="this.style.background='#192945'">
+        <span class="btn-text">{{ i18n "view_more" }}</span>
+        <span class="btn-icon" style="display:inline-block;margin-left:6px;transition:transform 0.3s;">▼</span>
+      </button>
+    </div>
+    {{ end }}
   </div>
 </section>
 {{ end }}
 
 <!-- Top Rankings (Horizontal Scroll) -->
 {{ if $products }}
-<section class="section-padding bg-white">
+<section class="section-padding bg-white" id="section-products">
   <div class="max-w-content mx-auto px-6">
     <div class="flex items-center justify-between mb-8">
       <div>
         <h2 class="text-xl font-semibold text-brand">{{ i18n "latest_products" }}</h2>
         <p class="text-sm text-neutral-muted mt-1">{{ i18n "latest_products_subtitle" }}</p>
       </div>
-      <a href="/product/" class="text-sm font-medium text-brand hover:text-accent transition-colors">{{ i18n "view_all" }} →</a>
+      <a href="{{ relLangURL "/product/" }}" class="text-sm font-medium text-brand hover:text-accent transition-colors">{{ i18n "view_all" }} →</a>
     </div>
-    <div class="flex gap-5 overflow-x-auto pb-4 -mx-6 px-6 snap-x snap-mandatory lg:grid lg:grid-cols-4 lg:overflow-visible lg:pb-0 lg:-mx-0 lg:px-0">
-      {{ range first 8 $products }}
+    <div class="flex gap-5 overflow-x-auto pb-4 -mx-6 px-6 snap-x snap-mandatory lg:grid lg:grid-cols-4 lg:overflow-visible lg:pb-0 lg:-mx-0 lg:px-0" id="products-grid">
+      {{ range first 4 $products }}
         <div class="min-w-[280px] snap-start lg:min-w-0 lg:snap-none">
           {{ partial "product-card" (dict "product" .) }}
         </div>
       {{ end }}
     </div>
+    {{ if gt (len $products) 4 }}
+    <div class="extra-items hidden" id="products-extra" style="display:none;">
+      <div class="flex gap-5 overflow-x-auto pb-4 -mx-6 px-6 snap-x snap-mandatory lg:grid lg:grid-cols-4 lg:overflow-visible lg:pb-0 lg:-mx-0 lg:px-0 mt-5">
+        {{ range after 4 $products }}
+          <div class="min-w-[280px] snap-start lg:min-w-0 lg:snap-none">
+            {{ partial "product-card" (dict "product" .) }}
+          </div>
+        {{ end }}
+      </div>
+    </div>
+    <div class="text-center mt-8">
+      <button class="view-more-btn" data-section="products" style="padding:10px 28px;background:#192945;color:#fff;font-weight:500;border:none;border-radius:10px;font-size:14px;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.background='#e67e22'" onmouseout="this.style.background='#192945'">
+        <span class="btn-text">{{ i18n "view_more" }}</span>
+        <span class="btn-icon" style="display:inline-block;margin-left:6px;transition:transform 0.3s;">▼</span>
+      </button>
+    </div>
+    {{ end }}
+  </div>
+</section>
+{{ end }}
+
+<!-- Latest Articles -->
+{{ if $blogs }}
+<section class="section-padding bg-neutral-light" id="section-blogs">
+  <div class="max-w-content mx-auto px-6">
+    <div class="flex items-center justify-between mb-8">
+      <div>
+        <h2 class="text-xl font-semibold text-brand">{{ i18n "latest_articles" }}</h2>
+        <p class="text-sm text-neutral-muted mt-1">{{ i18n "latest_articles_subtitle" }}</p>
+      </div>
+      <a href="{{ relLangURL "/blog/" }}" class="text-sm font-medium text-brand hover:text-accent transition-colors">{{ i18n "view_all" }} →</a>
+    </div>
+    <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3" id="blogs-grid">
+      {{ range first 3 $blogs }}
+        <article class="card">
+          <div class="card-body p-6">
+            <h3 class="text-[15px] font-semibold text-brand mt-1 mb-2"><a href="{{ .RelPermalink }}" class="hover:text-accent transition-colors">{{ .Title }}</a></h3>
+            {{ with .Params.description }}<p class="text-sm text-neutral-text leading-relaxed line-clamp-3 mb-3">{{ . }}</p>{{ end }}
+            <div class="flex items-center justify-between text-[13px] text-neutral-muted">
+              <span>{{ .Params.author }}</span>
+              <span>{{ .Params.last_updated | time.Format (i18n "date_format") }}</span>
+            </div>
+          </div>
+        </article>
+      {{ end }}
+    </div>
+    {{ if gt (len $blogs) 3 }}
+    <div class="extra-items hidden" id="blogs-extra" style="display:none;">
+      <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3 mt-5">
+        {{ range after 3 $blogs }}
+          <article class="card">
+            <div class="card-body p-6">
+              <h3 class="text-[15px] font-semibold text-brand mt-1 mb-2"><a href="{{ .RelPermalink }}" class="hover:text-accent transition-colors">{{ .Title }}</a></h3>
+              {{ with .Params.description }}<p class="text-sm text-neutral-text leading-relaxed line-clamp-3 mb-3">{{ . }}</p>{{ end }}
+              <div class="flex items-center justify-between text-[13px] text-neutral-muted">
+                <span>{{ .Params.author }}</span>
+                <span>{{ .Params.last_updated | time.Format (i18n "date_format") }}</span>
+              </div>
+            </div>
+          </article>
+        {{ end }}
+      </div>
+    </div>
+    <div class="text-center mt-8">
+      <button class="view-more-btn" data-section="blogs" style="padding:10px 28px;background:#192945;color:#fff;font-weight:500;border:none;border-radius:10px;font-size:14px;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.background='#e67e22'" onmouseout="this.style.background='#192945'">
+        <span class="btn-text">{{ i18n "view_more" }}</span>
+        <span class="btn-icon" style="display:inline-block;margin-left:6px;transition:transform 0.3s;">▼</span>
+      </button>
+    </div>
+    {{ end }}
   </div>
 </section>
 {{ end }}
@@ -118,28 +233,47 @@
 </section>
 
 <script>
+  // View More / View Less toggle
+  (function() {
+    var buttons = document.querySelectorAll('.view-more-btn');
+    for (var i = 0; i < buttons.length; i++) {
+      buttons[i].addEventListener('click', function() {
+        var section = this.getAttribute('data-section');
+        var extra = document.getElementById(section + '-extra');
+        var btnText = this.querySelector('.btn-text');
+        var btnIcon = this.querySelector('.btn-icon');
+        if (extra.style.display === 'none' || extra.style.display === '') {
+          extra.style.display = 'block';
+          btnText.textContent = '{{ i18n "view_less" }}';
+          btnIcon.style.transform = 'rotate(180deg)';
+        } else {
+          extra.style.display = 'none';
+          btnText.textContent = '{{ i18n "view_more" }}';
+          btnIcon.style.transform = 'rotate(0deg)';
+          extra.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      });
+    }
+  })();
+
+  // Newsletter subscribe
   const subscribeForm = document.getElementById('subscribe-form');
   const subscribeBtn = document.getElementById('subscribe-btn');
   const subscribeMsg = document.getElementById('subscribe-msg');
-  
+
   if (subscribeForm) {
     subscribeForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       const email = document.getElementById('subscribe-email').value;
-      
       subscribeBtn.disabled = true;
       subscribeBtn.textContent = 'Subscribing...';
-      
       try {
-        // Submit directly to FormSubmit.co (must be from browser, not server)
         const response = await fetch('https://formsubmit.co/ajax/Assnent@gmail.com', {
           method: 'POST',
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: `email=${encodeURIComponent(email)}&_subject=New+Newsletter+Subscription+-+SavingSec&_captcha=false`
+          body: 'email=' + encodeURIComponent(email) + '&_subject=New+Newsletter+Subscription+-+SavingSec&_captcha=false'
         });
-        
         const data = await response.json();
-        
         if (data.success) {
           subscribeMsg.textContent = 'Thank you for subscribing!';
           subscribeMsg.classList.remove('hidden');
@@ -154,22 +288,21 @@
       } finally {
         subscribeBtn.disabled = false;
         subscribeBtn.textContent = '{{ i18n "subscribe" }}';
-        setTimeout(() => subscribeMsg.classList.add('hidden'), 5000);
+        setTimeout(function() { subscribeMsg.classList.add('hidden'); }, 5000);
       }
     });
   }
-</script>
 
-<script>
+  // Hero search
   const heroSearch = document.getElementById('hero-search');
   const heroSearchBtn = document.getElementById('hero-search-btn');
   if (heroSearch) {
-    const doSearch = () => {
+    const doSearch = function() {
       if (heroSearch.value.trim().length > 0) {
-        window.location.href = `/search/?q=${encodeURIComponent(heroSearch.value.trim())}`;
+        window.location.href = '/search/?q=' + encodeURIComponent(heroSearch.value.trim());
       }
     };
-    heroSearch.addEventListener('keypress', (e) => {
+    heroSearch.addEventListener('keypress', function(e) {
       if (e.key === 'Enter') doSearch();
     });
     if (heroSearchBtn) {

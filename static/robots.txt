@@ -1,3 +1,20 @@
 User-agent: *
 Allow: /
-Sitemap: https://chanpintuijian.com/sitemap.xml
+
+# AI Search
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+Sitemap: https://savingsec.com/sitemap.xml

@@ -1,41 +1,41 @@
-{{ $coupon := .coupon }}
-<article class="card">
-  <div class="p-6">
-    <div class="flex flex-col sm:flex-row sm:items-center gap-4">
-      <!-- Discount Badge -->
-      <div class="flex-shrink-0 w-16 h-16 bg-accent/10 rounded-lg flex flex-col items-center justify-center">
-        <span class="text-base font-bold text-accent">{{ $coupon.Params.discount }}</span>
-        {{ if eq $coupon.Params.discount_type "percentage" }}<span class="text-[10px] text-accent">% OFF</span>{{ end }}
-      </div>
-      <!-- Content -->
-      <div class="flex-1 min-w-0">
-        <h3 class="text-[15px] font-semibold text-brand line-clamp-1">
-          <a href="{{ $coupon.RelPermalink }}" class="hover:text-accent transition-colors">{{ $coupon.Title }}</a>
-        </h3>
-        {{ with $coupon.Params.brand }}
-          <a href="/brand/{{ . | urlize }}/" class="text-[13px] text-accent hover:text-accent-light transition-colors">{{ . }}</a>
-        {{ end }}
-        {{ with $coupon.Params.description }}<p class="text-sm text-neutral-text line-clamp-1 mt-1">{{ . }}</p>{{ end }}
-      </div>
-      <!-- Code Box -->
-      {{ if $coupon.Params.code }}
-        <div class="flex-shrink-0" id="code-{{ $coupon.File.UniqueID }}">
-          {{ if $coupon.Params.verified }}
-            <span class="inline-flex items-center px-2 py-0.5 text-[11px] font-medium text-accent bg-accent/10 rounded-full mb-2">✓ {{ i18n "verified" }}</span>
-          {{ end }}
-          <div class="flex items-center gap-2">
-            <code class="px-3 py-1.5 bg-neutral-light text-brand font-mono text-sm rounded-lg border-2 border-dashed border-neutral-border">{{ $coupon.Params.code }}</code>
-            <button class="px-3 py-1.5 bg-brand text-white text-[13px] font-medium rounded-lg hover:bg-brand-light transition-all duration-200" onclick="copyCode('{{ $coupon.Params.code }}', 'code-{{ $coupon.File.UniqueID }}')">
-              <span class="copy-text">{{ i18n "copy_code" }}</span>
-            </button>
-          </div>
-        </div>
-      {{ end }}
-    </div>
-    {{ with $coupon.Params.expiry_date }}
-      <div class="mt-3 pt-3 border-t border-neutral-light text-[12px] text-neutral-muted">
-        {{ i18n "expires" }}: {{ . }}
-      </div>
-    {{ end }}
-  </div>
-</article>
+{{ $coupon := .coupon }}
+<article class="card">
+  <div class="card-body p-6">
+    <div class="flex flex-col sm:flex-row sm:items-center gap-4">
+      <!-- Discount Badge -->
+      <div class="flex-shrink-0 w-16 h-16 bg-accent/10 rounded-lg flex flex-col items-center justify-center">
+        <span class="text-base font-bold text-accent">{{ $coupon.Params.discount }}</span>
+        {{ if eq $coupon.Params.discount_type "percentage" }}<span class="text-[10px] text-accent">% OFF</span>{{ end }}
+      </div>
+      <!-- Content -->
+      <div class="flex-1 min-w-0">
+        <h3 class="text-[15px] font-semibold text-brand line-clamp-1">
+          <a href="{{ $coupon.RelPermalink }}" class="hover:text-accent transition-colors">{{ $coupon.Title }}</a>
+        </h3>
+        {{ with $coupon.Params.brand }}
+          <a href="/brand/{{ . | urlize }}/" class="text-[13px] text-accent hover:text-accent-light transition-colors">{{ . }}</a>
+        {{ end }}
+        {{ with $coupon.Params.description }}<p class="text-sm text-neutral-text line-clamp-1 mt-1">{{ . }}</p>{{ end }}
+      </div>
+      <!-- Code Box -->
+      {{ if $coupon.Params.code }}
+        <div class="flex-shrink-0" id="code-{{ $coupon.File.UniqueID }}">
+          {{ if $coupon.Params.verified }}
+            <span class="inline-flex items-center px-2 py-0.5 text-[11px] font-medium text-accent bg-accent/10 rounded-full mb-2">✓ {{ i18n "verified" }}</span>
+          {{ end }}
+          <div class="flex items-center gap-2">
+            <code class="px-3 py-1.5 bg-neutral-light text-brand font-mono text-sm rounded-lg border-2 border-dashed border-neutral-border">{{ $coupon.Params.code }}</code>
+            <button class="px-3 py-1.5 bg-brand text-white text-[13px] font-medium rounded-lg hover:bg-brand-light transition-all duration-200" onclick="copyCode('{{ $coupon.Params.code }}', 'code-{{ $coupon.File.UniqueID }}')">
+              <span class="copy-text">{{ i18n "copy_code" }}</span>
+            </button>
+          </div>
+        </div>
+      {{ end }}
+    </div>
+    {{ with $coupon.Params.expiry_date }}
+      <div class="mt-3 pt-3 border-t border-neutral-light text-[12px] text-neutral-muted">
+        {{ i18n "expires" }}: {{ . }}
+      </div>
+    {{ end }}
+  </div>
+</article>

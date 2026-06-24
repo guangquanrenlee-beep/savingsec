@@ -1,0 +1,70 @@
+{{/* Review Schema: Product (top-level) with aggregateRating */}}
+{{ if eq .Section "review" }}
+<script type="application/ld+json">
+{{- $rating := .Params.rating | default 4 -}}
+{{- $reviewCount := .Params.review_count | default 1 -}}
+{{- $currency := .Params.currency | default "USD" -}}
+{{- $price := .Params.price | default 0 -}}
+{{- $productName := .Params.product_name | default .Title -}}
+{{- $brandName := .Params.brand | default $productName -}}
+{{- $authorName := .Params.author | default .Site.Params.author -}}
+{{- $siteName := .Site.Params.siteName -}}
+{{- $imageURL := "" -}}
+{{- with .Params.featured_image }}{{ $imageURL = . | absURL }}{{ else }}{{ with .Params.image }}{{ $imageURL = . | absURL }}{{ end }}{{ end -}}
+{{- $productURL := .Permalink -}}
+{{- with .Params.affiliate_link }}{{ $productURL = . }}{{ end -}}
+{{- $schema := dict
+  "@context" "https://schema.org"
+  "@type" "Product"
+  "name" $productName
+  "description" (.Params.description | default .Summary | truncate 200)
+  "url" $productURL
+  "brand" (dict
+    "@type" "Brand"
+    "name" $brandName
+  )
+  "aggregateRating" (dict
+    "@type" "AggregateRating"
+    "ratingValue" $rating
+    "bestRating" "5"
+    "worstRating" "1"
+    "ratingCount" $reviewCount
+    "reviewCount" $reviewCount
+  )
+  "offers" (dict
+    "@type" "Offer"
+    "url" $productURL
+    "priceCurrency" $currency
+    "price" $price
+    "availability" "https://schema.org/InStock"
+  )
+  "review" (dict
+    "@type" "Review"
+    "reviewRating" (dict
+      "@type" "Rating"
+      "ratingValue" $rating
+      "bestRating" "5"
+      "worstRating" "1"
+    )
+    "author" (dict
+      "@type" "Person"
+      "name" $authorName
+    )
+    "publisher" (dict
+      "@type" "Organization"
+      "name" $siteName
+    )
+    "datePublished" (.Date.Format "2006-01-02")
+    "dateModified" ((.Params.last_updated | default .Params.lastmod | default .Lastmod) | time.Format "2006-01-02")
+  )
+  "mainEntityOfPage" (dict
+    "@type" "WebPage"
+    "@id" .Permalink
+  )
+-}}
+{{- if $imageURL -}}
+{{- $schema = merge $schema (dict "image" $imageURL) -}}
+{{- end -}}
+{{ $schema | jsonify | safeJS }}
+</script>
+{{ end }}

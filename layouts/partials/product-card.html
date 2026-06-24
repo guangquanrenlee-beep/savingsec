@@ -1,15 +1,8 @@
 {{ $product := .product }}
 <article class="card group" itemscope itemtype="https://schema.org/Product">
-  <div class="p-6">
-    <!-- Image + Header -->
+  <div class="card-body p-6">
+    <!-- Header -->
     <div class="flex items-start gap-4 mb-4">
-      {{ with $product.Params.image }}
-        <img src="{{ . }}" alt="{{ $product.Title }}" class="w-14 h-14 object-cover rounded-lg flex-shrink-0" loading="lazy" itemprop="image">
-      {{ else }}
-        <div class="w-14 h-14 bg-neutral-light rounded-lg flex items-center justify-center flex-shrink-0">
-          <span class="text-xl">📦</span>
-        </div>
-      {{ end }}
       <div class="min-w-0 flex-1">
         {{ with $product.Params.brand }}
           <a href="/brand/{{ . | urlize }}/" class="text-xs font-medium text-accent hover:text-accent-light transition-colors" itemprop="brand">{{ . }}</a>

@@ -1,32 +1,32 @@
-{{ $deal := .deal }}
-<article class="card">
-  <div class="p-6">
-    <div class="flex items-start gap-4">
-      <!-- Discount -->
-      <div class="flex-shrink-0 w-16 h-16 bg-accent/10 rounded-lg flex items-center justify-center">
-        <span class="text-base font-bold text-accent">{{ $deal.Params.discount_rate }}</span>
-      </div>
-      <!-- Content -->
-      <div class="flex-1 min-w-0">
-        <h3 class="text-[15px] font-semibold text-brand line-clamp-1">
-          <a href="{{ $deal.RelPermalink }}" class="hover:text-accent transition-colors">{{ $deal.Title }}</a>
-        </h3>
-        {{ with $deal.Params.brand }}
-          <a href="/brand/{{ . | urlize }}/" class="text-[13px] text-accent hover:text-accent-light transition-colors">{{ . }}</a>
-        {{ end }}
-        <div class="flex items-center gap-2 mt-2">
-          {{ with $deal.Params.price }}<span class="text-lg font-bold text-accent">{{ . }}</span>{{ end }}
-          {{ with $deal.Params.original_price }}<span class="text-[13px] text-neutral-muted line-through">{{ . }}</span>{{ end }}
-        </div>
-      </div>
-      {{ if $deal.Params.time_limited }}
-        <span class="flex-shrink-0 tag-accent">{{ i18n "time_limited" }}</span>
-      {{ end }}
-    </div>
-    {{ with $deal.Params.affiliate_link }}
-      <a href="{{ . }}" class="mt-4 block w-full text-center px-4 py-2.5 bg-brand text-white text-[14px] font-medium rounded-lg hover:bg-brand-light transition-all duration-200" target="_blank" rel="nofollow sponsored">
-        {{ i18n "grab_now" }}
-      </a>
-    {{ end }}
-  </div>
-</article>
+{{ $deal := .deal }}
+<article class="card">
+  <div class="card-body p-6">
+    <div class="flex items-start gap-4">
+      <!-- Discount -->
+      <div class="flex-shrink-0 w-16 h-16 bg-accent/10 rounded-lg flex items-center justify-center">
+        <span class="text-base font-bold text-accent">{{ $deal.Params.discount_rate }}</span>
+      </div>
+      <!-- Content -->
+      <div class="flex-1 min-w-0">
+        <h3 class="text-[15px] font-semibold text-brand line-clamp-1">
+          <a href="{{ $deal.RelPermalink }}" class="hover:text-accent transition-colors">{{ $deal.Title }}</a>
+        </h3>
+        {{ with $deal.Params.brand }}
+          <a href="/brand/{{ . | urlize }}/" class="text-[13px] text-accent hover:text-accent-light transition-colors">{{ . }}</a>
+        {{ end }}
+        <div class="flex items-center gap-2 mt-2">
+          {{ with $deal.Params.price }}<span class="text-lg font-bold text-accent">{{ . }}</span>{{ end }}
+          {{ with $deal.Params.original_price }}<span class="text-[13px] text-neutral-muted line-through">{{ . }}</span>{{ end }}
+        </div>
+      </div>
+      {{ if $deal.Params.time_limited }}
+        <span class="flex-shrink-0 tag-accent">{{ i18n "time_limited" }}</span>
+      {{ end }}
+    </div>
+    {{ with $deal.Params.affiliate_link }}
+      <a href="{{ . }}" class="mt-4 block w-full text-center px-4 py-2.5 bg-brand text-white text-[14px] font-medium rounded-lg hover:bg-brand-light transition-all duration-200" target="_blank" rel="nofollow sponsored">
+        {{ i18n "grab_now" }}
+      </a>
+    {{ end }}
+  </div>
+</article>

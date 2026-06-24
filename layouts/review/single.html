@@ -9,6 +9,13 @@
     <span class="text-brand">{{ .Title }}</span>
   </nav>
 
+  <!-- Featured Image -->
+  {{ with .Params.image }}
+  <div class="rounded-xl overflow-hidden mb-6 bg-neutral-light">
+    <img src="{{ . | relURL }}" alt="{{ $.Title }}" class="w-full h-auto" loading="eager">
+  </div>
+  {{ end }}
+
   <!-- Review Header -->
   <header class="mb-8">
     <h1 class="text-2xl font-semibold text-brand mb-3">{{ .Title }}</h1>

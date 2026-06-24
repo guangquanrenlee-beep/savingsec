@@ -1,0 +1,17 @@
+{{- $destination := .Destination -}}
+{{- $u := urls.Parse $destination -}}
+{{- if not $u.IsAbs -}}
+  {{- $path := strings.TrimPrefix "/" $u.Path -}}
+  {{- $img := resources.Get $path -}}
+  {{- if $img -}}
+    {{- $processed := $img -}}
+    {{- if or (gt $img.Width 1200) (ne $img.MediaType.SubType "webp") -}}
+      {{- $processed = $img.Resize "1200x webp" -}}
+    {{- end -}}
+    <img src="{{ $processed.RelPermalink }}" alt="{{ .Text }}" width="{{ $processed.Width }}" height="{{ $processed.Height }}" loading="lazy" style="max-width:100%;height:auto">
+  {{- else -}}
+    <img src="{{ $destination | safeURL }}" alt="{{ .Text }}" loading="lazy" style="max-width:100%;height:auto">
+  {{- end -}}
+{{- else -}}
+  <img src="{{ $destination | safeURL }}" alt="{{ .Text }}" loading="lazy" style="max-width:100%;height:auto">
+{{- end -}}

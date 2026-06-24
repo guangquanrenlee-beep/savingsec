@@ -8,7 +8,7 @@
 - id: nav_toplist
   translation: "ランキング"
 - id: nav_tips
-  translation: "節約ガイド"
+  translation: "Blog"
 - id: nav_deals
   translation: "セール"
 - id: nav_products
@@ -51,6 +51,8 @@
   translation: "最新レビュー"
 - id: latest_articles
   translation: "最新記事"
+- id: latest_articles_subtitle
+  translation: "購入ガイド、ヒント＆洞察"
 - id: view_all
   translation: "すべて表示"
 - id: related_products
@@ -235,3 +237,7 @@
   translation: "クーポン"
 - id: view_details
   translation: "詳細を見る →"
+- id: view_more
+  translation: "もっと見る"
+- id: view_less
+  translation: "閉じる"

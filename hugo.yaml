@@ -77,6 +77,16 @@ outputFormats:
     isPlainText: true
     notAlternative: true
 
+# ── Image Constraint Standard ──────────────────────────
+# All homepage/card images must conform to:
+#   Size:   800 × 450 px (16:9 aspect ratio)
+#   Format: JPEG (converted from PNG/WebP)
+#   Max:    500 KB
+#   Tool:   python scripts/optimize-images.py
+#   Note:   Images live in static/images/ or assets/images/
+#           Frontmatter `image:` paths updated accordingly
+# ────────────────────────────────────────────────────────
+
 params:
   description: "Professional product reviews, coupon codes & deal aggregation platform"
   author: "SavingSec Team"

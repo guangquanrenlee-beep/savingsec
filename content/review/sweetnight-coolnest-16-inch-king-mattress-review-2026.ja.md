@@ -8,6 +8,8 @@ tags: ["cooling-memory-foam-mattress", "king-size-mattress-review", "budget-cool
 rating: 4.3
 author: "SavingSec Team"
 product_name: "Sweetnight CoolNest 16 Inch King Mattress"
+brand: "Sweetnight"
+image: "/images/sweetnight-coolnest.jpg"
 last_updated: "2026-06-13"
 draft: false
 ---
